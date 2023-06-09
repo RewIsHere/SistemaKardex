@@ -1,0 +1,163 @@
+@import url('https://fonts.cdnfonts.com/css/berlin-sans-fb-demi');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@600&family=Rubik:wght@700&display=swap');
+@import url('https://css.gg/details-more.css');
+/* IMPORTA LAS TIPOGRAFIAS E ICONOS */
+
+* {
+    padding: 0px;
+    margin: 0px;
+    /* REINICIA LOS VALORES POR DEFECTO DEL NAVEGADOR */
+}
+
+:root {
+    --red: #ff3838;
+    --white: #ffffff;
+    --black: #000000;
+    --colorFondo: #fffff;
+    --colorPrimario: #800000;
+    --colorSecundario: #FFFFFF;
+    /* VARIABLES GLOBALES DEL DOCUMENTO */
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    background-color: var(--colorFondo) !important;
+    color: #FFFFFF !important;
+    font-family: 'Rubik', sans-serif !important;
+}
+
+/* ESTILOS DEL MENU DE NAVEGACION*/
+
+.navegacion {
+    background-color: var(--colorPrimario);
+    padding: 30px 10px;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    font-family: 'Rubik', sans-serif;
+}
+
+.navegacion a {
+    float: left;
+    color: var(--white);
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 25px;
+    padding: 12px;
+}
+
+.navegacion__navegacion-list a:hover {
+    color: var(--red);
+}
+
+.navegacion__navegacion-list a.active {
+    color: var(--red);
+}
+
+.navegacion__navegacion-list a {
+    transition: color 0.5s ease;
+}
+
+.navegacion .navegacion__icon {
+    display: none;
+}
+
+.navegacion ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navegacion li {
+    list-style: none;
+}
+
+
+/* ESTILOS DE LA TIRA DE LA CABECERA */
+
+.tira-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tira-header__img {
+    width: 80%;
+}
+
+.switch-cuenta {
+    display: flex;
+    justify-content: center;
+}
+
+.switch-cuenta a {
+
+    margin: 10px;
+}
+
+/* ESTILOS DEL FORMULARIO DE LOGIN */
+.form-subir {
+    padding: 50px 20px;
+    background-color: #ededed;
+    margin: calc(25% + 100px);
+    margin-top: 70px;
+    padding-top: 28px;
+    margin-bottom: 30px;
+    color: var(--black);
+}
+
+.form-subir h1 {
+
+    text-align: center;
+    color: var(--black);
+}
+
+.contenedor {
+    width: 100%;
+}
+
+.form-subir input[type="file"] {
+    font-size: 20px;
+    width: 82%;
+    padding: 10px;
+    border: none;
+    margin: auto;
+    margin-top: 12px;
+}
+
+.form-subir input {
+    width: calc(100% - 20px);
+    padding: 9px;
+    margin: auto;
+    margin-top: 12px;
+    font-size: 16px;
+}
+
+.button {
+    border: none;
+    width: 80%;
+    color: white;
+    font-size: 20px;
+    background: #220c51;
+    padding: 5px 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.form-subir p {
+    text-align: center;
+    color: var(--black);
+}
+
+.form-subir label {
+    color: #220c51;
+    font-size: 18px;
+}
