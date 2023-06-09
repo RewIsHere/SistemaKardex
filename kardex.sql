@@ -1,3 +1,9 @@
+--Server: sql9.freemysqlhosting.net
+--Name: sql9624972
+--Username: sql9624972
+--Password: ljsn9hpFG3
+--Port number: 3306
+-- Jefaturasistemas123
 -- --------------------------------------------------------
 --
 -- Estructura de tabla para la tabla `alumno`
@@ -60,7 +66,7 @@ CREATE TABLE `docs_alumno` (
 
 -- PROCEDIMIENTO ALMACENADO PARA REGISTRAR A ALUMNOS
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `registar_alumno`(
+CREATE PROCEDURE `registar_alumno`(
 num_control varchar(15),
 nombre varchar(40),
 apellido_pat varchar(40),
@@ -79,14 +85,14 @@ DELIMITER ;
 
 -- PROCEDIMIENTO ALMACENADO PARA VERIFICAR SI LA CUENTA DEL ALUMNO EXISTE
 DELIMITER $
-CREATE DEFINER=`root`@`localhost` PROCEDURE `verificarCuenta`(IN `nocontrol` VARCHAR(255))
+CREATE PROCEDURE `verificarCuenta`(IN `nocontrol` VARCHAR(255))
     NO SQL
 SELECT num_control FROM alumno  WHERE num_control=nocontrol$
 DELIMITER ;
 
 -- PROCEDIMIENTO ALMACENADO PARA VERIFICAR SI LA CUENTA DEL JEFE DE CARRERA EXISTE
 DELIMITER $
-CREATE DEFINER=`root`@`localhost` PROCEDURE `verificarCuentaJefe`(IN `email` VARCHAR(255))
+CREATE PROCEDURE `verificarCuentaJefe`(IN `email` VARCHAR(255))
     NO SQL
 SELECT correo FROM JefeCarrera  WHERE correo=email$
 DELIMITER ;
