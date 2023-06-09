@@ -5,7 +5,7 @@ define('DB_PASSSWORD', 'titospass');
 define('DB_NOMBRE', 'Kardex');
 
 // Ruta al archivo de certificado SSL
-define('DB_SSL_CERT', '/ruta/al/certificado.pem');
+define('DB_SSL_CERT', '../DigiCertGlobalRootG2.crt.pem');
 
 $con = mysqli_init();
 
