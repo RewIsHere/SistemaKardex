@@ -2,14 +2,14 @@
 require_once '../services/ConexionBD.php';
 
 // VERIFICA QUE LOS CAMPOS DEL FORMULARIO HAYAN SIDO LLENADOS , EN CASO DE QUE NO SALDRA UN MENSAJE DE ERROR
-if (!isset($_POST['num_control'], $_POST['contraseña'])) {
+if (!isset($_POST['num_control'], $_POST['contrasena'])) {
         echo 'alert("Por favor llena ambos campos")';
 }
 //INICIA EL PROCESO DE SESION
 session_start();
 
 // PREPARA EL QUERY QUE SE ENCARGARA DE COMPROBAR QUE EN LA TABLA DE "ALUMNO" EXISTA EL CORREO INTRODUCIDO EN EL FORMULARIO
-if ($stmt = $con->prepare('SELECT num_control, nombre, contraseña FROM alumno WHERE num_control = ?')) {
+if ($stmt = $con->prepare('SELECT num_control, nombre, contrasena FROM alumno WHERE num_control = ?')) {
         // REMPLAZA EL SIMBOLO = ? EN EL QUERY DEL IF , ES DECIR WHERE num_control = ?, donde ? = NUMERO DE CONTROL DEL ALUMNO
         $stmt->bind_param('s', $_POST['num_control']);
         $stmt->execute();
@@ -22,7 +22,7 @@ if ($stmt = $con->prepare('SELECT num_control, nombre, contraseña FROM alumno W
                 $stmt->bind_result($no_control, $nombre, $contra);
                 $stmt->fetch();
                 //LA CUENTA EXISTE, AHORA COMPROBAMOS SI LA CONTRASEÑA ES CORRECTA
-                if ($_POST['contraseña'] === $contra) {
+                if ($_POST['contrasena'] === $contra) {
                         // LA VERIFICACION HA SIDO CORRECTA, EL USUARIO HA INICIADO SESION CORRECTAMENTE
 
                         /* ESTO BASICAMENTE CREA SESIONES, ESTE METODO SABE CUANDO UN USUARIO SE HA LOGEADO, Y LO GUARDA EN FORMA DE COOKIES, 

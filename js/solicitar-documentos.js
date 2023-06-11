@@ -20,6 +20,14 @@ $(document).ready(function () {
           }).then(function () {
             location.reload();
           });
+        } else if (response.trim() === "exceeded") {
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Ya has superado el limite de 3 solicitudes en este mes.",
+            showConfirmButton: false,
+            timer: 2000,
+          });
         } else {
           Swal.fire({
             icon: "error",

@@ -47,7 +47,7 @@ if ($stmt = $con->prepare('SELECT * FROM JefeCarrera WHERE correo = ?')) {
                     <a href="index.php" class="active">INICIO</a>
                 </li>
                 <li>
-                    <a href="registro.php">REGISTRARSE</a>
+                    <a href="registro.php">REGISTRO</a>
                 </li>
                 <li>
                     <a href="login.php">INICIAR SESION</a>
@@ -62,11 +62,11 @@ if ($stmt = $con->prepare('SELECT * FROM JefeCarrera WHERE correo = ?')) {
         </div>
     </nav>
     <div class="content">
-        <h2>Inicio | Panel de Docente</h2>
+        <h2>Inicio | Panel de Administrativo</h2>
         <p style="background-color: #607eff;">Bienvenido de nuevo, <?= $_SESSION['nombre'] ?>!</p>
-        <p>Mirar los alumnos que necesitan ser aprobados, <a href="aprobaciones.php">CLICK AQUI </a></p>
-        <p>VER LISTA DE SOLICITUDES DE DOCUMENTOS, <a href="lista_solicitudes.php">CLICK AQUI </a></p>
-        <p>VER LISTA DE DOCUMENTOS ENVIADOS, <a href="archivos.php">CLICK AQUI </a></p>
+        <p>VER LISTA DE ALUMNOS, <a class="btn btn-primary" href="aprobaciones.php">CLICK AQUI </a></p>
+        <p>VER LISTA DE SOLICITUDES DE DOCUMENTOS, <a class="btn btn-primary" href="lista_solicitudes.php">CLICK AQUI </a></p>
+        <p>VER LISTA DE DOCUMENTOS ENVIADOS, <a class="btn btn-primary" href="archivos.php">CLICK AQUI </a></p>
     </div>
 </body>
 

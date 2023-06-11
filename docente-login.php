@@ -46,7 +46,7 @@ if (isset($_SESSION['SesionIniciada'])) {
                     <a href="index.php">INICIO</a>
                 </li>
                 <li>
-                    <a href="registro.php">REGISTRARSE</a>
+                    <a href="registro.php">REGISTRO</a>
                 </li>
                 <li>
                     <a href="login.php" class="active">INICIAR SESION</a>
@@ -68,7 +68,7 @@ if (isset($_SESSION['SesionIniciada'])) {
 
             <div class="input-contenedor1">
                 <i class="fa-solid fa-person icon"></i>
-                <input type="password" name="contraseña" placeholder="CONTRASEÑA" required>
+                <input type="password" name="contrasena" placeholder="CONTRASEÑA" required>
             </div>
 
             <input type="submit" value="Logear">

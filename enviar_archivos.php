@@ -45,7 +45,7 @@ $row = $globalsql->fetch_assoc();
                     <a href="index.php" class="active">INICIO</a>
                 </li>
                 <li>
-                    <a href="registro.php">REGISTRARSE</a>
+                    <a href="registro.php">REGISTRO</a>
                 </li>
                 <li>
                     <a href="login.php">INICIAR SESION</a>
@@ -92,22 +92,25 @@ $row = $globalsql->fetch_assoc();
                                         <tr style="background-color: #f97c46;color:#FFFFFF;text-align: center;">
                                             <th>Subido</th>
                                             <th>Nombre</th>
+                                            <th>Fecha de envio</th>
                                             <th>Accion</th>
                                         </tr>
                                     </thead>
                                     <tbody id="Creditos">
                                         <?php
 
-                                        $archivoquery1 = "SELECT Creditos FROM docs_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Creditos != ''";
+                                        $archivoquery1 = "SELECT Creditos, fecha_creditos FROM docs_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Creditos != ''";
                                         $archivosql1 = $con->query($archivoquery1);
                                         if ($archivosql1) {
                                             if (mysqli_num_rows($archivosql1) > 0) {
                                                 $archivorow1 = $archivosql1->fetch_assoc();
                                                 $col1 = $subido;
                                                 $col2 = '<a href="archivos/' . $archivorow1["Creditos"] . '" target="_blank"  class="btn btn-warning" role="button">Abrir</a>';
+                                                $colf1 = $archivorow1["fecha_creditos"];
                                             } else {
                                                 $col1 = $nosubido;
                                                 $col2 = 'NO DISPONIBLE';
+                                                $colf1 = 'NO DISPONIBLE';
                                             }
                                         } else {
                                             echo 'Error';
@@ -120,6 +123,7 @@ $row = $globalsql->fetch_assoc();
                                         <tr>
                                             <td style="text-align: center;"><?php echo $col1; ?></td>
                                             <td style="text-align: center;"><?php echo $row["nombre"] . ' ' . $row["apellido_pat"] . ' ' . $row["apellido_mat"]; ?></td>
+                                            <td style="text-align: center;"><?php echo $colf1 ?></td>
                                             <td style="text-align: center;"><?php echo $col2 ?></td>
                                         </tr>
 
@@ -135,22 +139,25 @@ $row = $globalsql->fetch_assoc();
                                         <tr style="background-color: #f97c46;color:#FFFFFF;text-align: center;">
                                             <th>Subido</th>
                                             <th>Nombre</th>
+                                            <th>Fecha de envio</th>
                                             <th>Accion</th>
                                         </tr>
                                     </thead>
                                     <tbody id="Justificantes">
                                         <?php
 
-                                        $archivoquery2 = "SELECT Justificantes FROM docs_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Justificantes != ''";
+                                        $archivoquery2 = "SELECT Justificantes, fecha_justi FROM docs_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Justificantes != ''";
                                         $archivosql2 = $con->query($archivoquery2);
                                         if ($archivosql2) {
                                             if (mysqli_num_rows($archivosql2) > 0) {
                                                 $archivorow2 = $archivosql2->fetch_assoc();
                                                 $col3 = $subido;
                                                 $col4 = '<a href="archivos/' . $archivorow2["Justificantes"] . '" target="_blank" class="btn btn-warning" role="button">Abrir</a>';
+                                                $colf2 = $archivorow2["fecha_justi"];
                                             } else {
                                                 $col3 = $nosubido;
                                                 $col4 = 'NO DISPONIBLE';
+                                                $colf2 = 'NO DISPONIBLE';
                                             }
                                         } else {
                                             echo 'Error';
@@ -161,6 +168,7 @@ $row = $globalsql->fetch_assoc();
                                         <tr>
                                             <td style="text-align: center;"><?php echo $col3;  ?></td>
                                             <td style="text-align: center;"><?php echo $row["nombre"] . ' ' . $row["apellido_pat"] . ' ' . $row["apellido_mat"]; ?></td>
+                                            <td style="text-align: center;"><?php echo $colf2 ?></td>
                                             <td style="text-align: center;"><?php echo $col4 ?></td>
                                         </tr>
                                     </tbody>
@@ -173,22 +181,25 @@ $row = $globalsql->fetch_assoc();
                                         <tr style="background-color: #f97c46;color:#FFFFFF;text-align: center;">
                                             <th>Subido</th>
                                             <th>Nombre</th>
+                                            <th>Fecha de envio</th>
                                             <th>Accion</th>
                                         </tr>
                                     </thead>
                                     <tbody id="Altas_y_Bajas">
                                         <?php
 
-                                        $archivoquery3 = "SELECT Altas_y_Bajas FROM docs_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Altas_y_Bajas != ''";
+                                        $archivoquery3 = "SELECT Altas_y_Bajas, fecha_altas FROM docs_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Altas_y_Bajas != ''";
                                         $archivosql3 = $con->query($archivoquery3);
                                         if ($archivosql3) {
                                             if (mysqli_num_rows($archivosql3) > 0) {
                                                 $archivorow3 = $archivosql3->fetch_assoc();
                                                 $col5 = $subido;
                                                 $col6 = '<a href="archivos/' . $archivorow3["Altas_y_Bajas"] . '" target="_blank" class="btn btn-warning" role="button">Abrir</a>';
+                                                $colf3 = $archivorow3["fecha_altas"];
                                             } else {
                                                 $col5 = $nosubido;
                                                 $col6 = 'NO DISPONIBLE';
+                                                $colf3 = 'NO DISPONIBLE';
                                             }
                                         } else {
                                             echo 'Error';
@@ -199,6 +210,7 @@ $row = $globalsql->fetch_assoc();
                                         <tr>
                                             <td style="text-align: center;"><?php echo $col5;  ?></td>
                                             <td style="text-align: center;"><?php echo $row["nombre"] . ' ' . $row["apellido_pat"] . ' ' . $row["apellido_mat"]; ?></td>
+                                            <td style="text-align: center;"><?php echo $colf3 ?></td>
                                             <td style="text-align: center;"><?php echo $col6 ?></td>
                                         </tr>
                                     </tbody>

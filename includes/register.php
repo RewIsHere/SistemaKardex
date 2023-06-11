@@ -1,12 +1,12 @@
 <?php
 require_once '../services/ConexionBD.php';
 // PREGUNTAMOS SI ALGUNO DE LOS CAMPOS DEL FORMULARIO DE REGISTRO HA SIDO ESTABLECIDO
-if (!isset($_POST['nombre'], $_POST['num_control'], $_POST['contraseña'], $_POST['correo'])) {
+if (!isset($_POST['nombre'], $_POST['num_control'], $_POST['contrasena'], $_POST['correo'])) {
     // EN CASO DE ESTAR VACIO ALGUNO, NOS MARCARA ERROR
     exit('Please complete the registration form!');
 }
 // PREGUNTAMOS SI ALGUN CAMPO ESTA VACIO
-if (empty($_POST['nombre']) || empty($_POST['num_control']) || empty($_POST['contraseña']) || empty($_POST['correo'])) {
+if (empty($_POST['nombre']) || empty($_POST['num_control']) || empty($_POST['contrasena']) || empty($_POST['correo'])) {
     // NUEVAMENTE NOS MARCARA ERROR EN CASO DE QUE LO ESTE
     exit('Please complete the registration form');
 }
@@ -18,9 +18,10 @@ $apellido_pat = $_POST['apellido_pat'];
 $apellido_mat = $_POST['apellido_mat'];
 $num_control = $_POST['num_control'];
 $correo = $_POST['correo'];
-$contra = $_POST['contraseña'];
+$contra = $_POST['contrasena'];
 $especialidad = $_POST['especialidad'];
 $sem_cursado = $_POST['semestre_cursado'];
+$fechaActual = date('Y-m-d');
 
 if ($stmt = $con->prepare("call verificarCuenta('$num_control')")) {
     $stmt->execute();
@@ -61,7 +62,7 @@ if ($stmt = $con->prepare("call verificarCuenta('$num_control')")) {
                 }
             }
         }
-        if ($stmt = $con->prepare("call registar_alumno('$num_control','$nombre','$apellido_pat','$apellido_mat','$nuevo_nombreArchivo','$sem_cursado','$especialidad','$correo','$contra', 0)")) {
+        if ($stmt = $con->prepare("call registar_alumno('$num_control','$nombre','$apellido_pat','$apellido_mat','$nuevo_nombreArchivo','$sem_cursado','$especialidad','$correo','$contra', 0, '$fechaActual')")) {
             $stmt->execute();
             echo "success";
         } else {

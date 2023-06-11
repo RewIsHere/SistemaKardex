@@ -53,7 +53,7 @@ if ($stmt = $con->prepare('SELECT * FROM JefeCarrera WHERE correo = ?')) {
                     <a href="index.php" class="active">INICIO</a>
                 </li>
                 <li>
-                    <a href="registro.php">REGISTRARSE</a>
+                    <a href="registro.php">REGISTRO</a>
                 </li>
                 <li>
                     <a href="login.php">INICIAR SESION</a>
@@ -92,7 +92,7 @@ require_once 'services/ConexionBD.php';
                         </div>
 
 
-                        <h4 class="card-title">Lista de alumnos aprobados/no aprobados</h4>
+                        <h4 class="card-title">Lista de alumnos</h4>
 
                         <div class="table-responsive">
                             <table class="table">
@@ -100,6 +100,7 @@ require_once 'services/ConexionBD.php';
                                     <tr style="background-color:purple; color:#FFFFFF;">
                                         <th>Num. Control</th>
                                         <th>Nombre</th>
+                                        <th>Fecha de registro</th>
                                         <th>Foto</th>
                                         <th>Accion</th>
                                     </tr>
@@ -114,6 +115,7 @@ require_once 'services/ConexionBD.php';
                                         <tr>
                                             <td style="text-align: center;"><?php echo $rowSql["num_control"]; ?></td>
                                             <td style="text-align: center;"><?php echo $rowSql["nombre"]; ?></td>
+                                            <td style="text-align: center;"><?php echo $rowSql["fecha_registro"]; ?></td>
                                             <td style="text-align: center;"><?php echo ('<a href="fotos/' . $rowSql["foto"] . '" class="btn btn-info" role="button" target="_blank">Ver foto</a>'); ?></td>
                                             <td style="text-align: center;">
                                                 <?php
@@ -132,6 +134,8 @@ require_once 'services/ConexionBD.php';
                                                     <input type="hidden" name="num_control2" value="<?php echo $rowSql['num_control']; ?>">
                                                     <button type="submit" class="btn btn-danger">ELIMINAR</button>
                                                 </form>
+                                                    <a href="historial.php?num_control=<?php echo $rowSql['num_control']; ?>" class="btn btn-info" role="button">Historial</a>
+
                                             </td>
                                         </tr>
 

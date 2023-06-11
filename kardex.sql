@@ -20,7 +20,8 @@ CREATE TABLE `alumno` (
   `especialidad` varchar(40) NOT NULL,
   `correo` varchar(60) NOT NULL,
   `contraseña` varchar(20) NOT NULL,
-  `aprobado` int(1) NOT NULL 
+  `aprobado` int(1) NOT NULL,
+  `fecha_registro` DATE NOT NULL
 );
 
 
@@ -49,7 +50,8 @@ CREATE TABLE `Solicitudes_alumno` (
   `Id_soli_a` int(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
   `Tipo_documento` varchar(200),
   `Url_documento` varchar(200),
-  `Id_alumno` varchar(15) NOT NULL UNIQUE,
+  `Id_alumno` varchar(15) NOT NULL,
+  `fecha_solicitud` DATE NOT NULL,
   FOREIGN KEY (`Id_alumno`)
   REFERENCES `alumno`(`num_control`) 
 );
@@ -60,6 +62,19 @@ CREATE TABLE `docs_alumno` (
   `Justificantes` varchar(200),
   `Altas_y_Bajas` varchar(200),
   `Id_alumno` varchar(15) NOT NULL UNIQUE,
+  `fecha_creditos` DATE NOT NULL,
+  `fecha_justi` DATE NOT NULL,
+  `fecha_altas` DATE NOT NULL,
+  FOREIGN KEY (`Id_alumno`)
+  REFERENCES `alumno`(`num_control`) 
+);
+
+CREATE TABLE `conteo` (
+  `Id_conteo` int(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  `Id_alumno` varchar(15) NOT NULL,
+  `Tipo_documento` varchar(200) NOT NULL,
+  `Fecha_conteo` DATE NOT NULL,
+  `cantidad` int(11) NOT NULL,
   FOREIGN KEY (`Id_alumno`)
   REFERENCES `alumno`(`num_control`) 
 );
@@ -75,11 +90,12 @@ foto varchar(60),
 semestre_cursado int(11),
 especialidad varchar(40),
 correo varchar(60),
-contraseña varchar(20),
-aprobado int(1)
+contrasena varchar(20),
+aprobado int(1),
+fecha_registro DATE
 )
 BEGIN
-insert into `alumno`(`num_control`, `nombre`, `apellido_pat`, `apellido_mat`, `foto`, `semestre_cursado`, `especialidad`, `correo`, `contraseña`, `aprobado`) value(num_control, nombre, apellido_pat, apellido_mat, foto, semestre_cursado, especialidad, correo, contraseña, aprobado);
+insert into `alumno`(`num_control`, `nombre`, `apellido_pat`, `apellido_mat`, `foto`, `semestre_cursado`, `especialidad`, `correo`, `contrasena`, `aprobado`, `fecha_registro`) value(num_control, nombre, apellido_pat, apellido_mat, foto, semestre_cursado, especialidad, correo, contrasena, aprobado, fecha_registro);
 END$$
 DELIMITER ;
 

@@ -93,7 +93,7 @@ if (isset($_SESSION['SesionIniciada'])) {
             </div>
             <div class="input-contenedor">
                 <i class="fa-solid fa-gamepad icon"></i>
-                <input type="password" name="contraseña" placeholder="Contraseña" id="contraseña" required>
+                <input type="password" name="contrasena" placeholder="Contraseña" id="contrasena" required>
             </div>
 
             <div class="input-contenedor" style="

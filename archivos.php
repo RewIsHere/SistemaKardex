@@ -53,7 +53,7 @@ if ($stmt = $con->prepare('SELECT * FROM JefeCarrera WHERE correo = ?')) {
                     <a href="index.php" class="active">INICIO</a>
                 </li>
                 <li>
-                    <a href="registro.php">REGISTRARSE</a>
+                    <a href="registro.php">REGISTRO</a>
                 </li>
                 <li>
                     <a href="login.php">INICIAR SESION</a>

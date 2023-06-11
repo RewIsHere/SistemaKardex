@@ -45,7 +45,7 @@ $row = $globalsql->fetch_assoc();
                     <a href="index.php" class="active">INICIO</a>
                 </li>
                 <li>
-                    <a href="registro.php">REGISTRARSE</a>
+                    <a href="registro.php">REGISTRO</a>
                 </li>
                 <li>
                     <a href="login.php">INICIAR SESION</a>
@@ -100,6 +100,7 @@ $row = $globalsql->fetch_assoc();
                                         <tr style="background-color: #f97c46;color:#FFFFFF;text-align: center;">
                                             <th>Estado</th>
                                             <th>Nombre</th>
+                                            <th>Fecha de solicitud</th>
                                             <th>Accion</th>
                                             <th>Contactar</th>
                                         </tr>
@@ -113,8 +114,10 @@ $row = $globalsql->fetch_assoc();
                                         if ($archivosql1) {
                                             if (mysqli_num_rows($archivosql1) > 0) {
                                                 $col1 = $solicitado;
+                                                $fechaSoli = $archivorow1["fecha_solicitud"];
                                             } else {
                                                 $col1 = $nosolicitado;
+                                                $fechaSoli = 'NO DISPONIBLE';
                                             }
                                         } else {
                                             echo 'Error';
@@ -137,6 +140,7 @@ $row = $globalsql->fetch_assoc();
                                         <tr>
                                             <td style="text-align: center;"><?php echo $col1; ?></td>
                                             <td style="text-align: center;"><?php echo $row["nombre"] . ' ' . $row["apellido_pat"] . ' ' . $row["apellido_mat"]; ?></td>
+                                            <td style="text-align: center;"><?php echo  $fechaSoli?></td>
                                             <td style="text-align: center;"><?php echo $col2 ?></td>
                                             <td style="text-align: center;"><a href="mailto:joseantonio.garcia@itspozarica.edu.mx" class="btn btn-primary">CONTACTAR VIA CORREO</a></td>
                                         </tr>
@@ -150,6 +154,7 @@ $row = $globalsql->fetch_assoc();
                                         <tr style="background-color: #f97c46;color:#FFFFFF;text-align: center;">
                                             <th>Estado</th>
                                             <th>Nombre</th>
+                                            <th>Fecha de solicitud</th>
                                             <th>Accion</th>
                                             <th>Contactar</th>
                                         </tr>
@@ -163,8 +168,10 @@ $row = $globalsql->fetch_assoc();
                                         if ($archivosql1) {
                                             if (mysqli_num_rows($archivosql1) > 0) {
                                                 $col1 = $solicitado;
+                                                $fechaSoli = $archivorow1["fecha_solicitud"];
                                             } else {
                                                 $col1 = $nosolicitado;
+                                                $fechaSoli = "NO DISPONIBLE";
                                             }
                                         } else {
                                             echo 'Error';
@@ -187,6 +194,7 @@ $row = $globalsql->fetch_assoc();
                                         <tr>
                                             <td style="text-align: center;"><?php echo $col1; ?></td>
                                             <td style="text-align: center;"><?php echo $row["nombre"] . ' ' . $row["apellido_pat"] . ' ' . $row["apellido_mat"]; ?></td>
+                                            <td style="text-align: center;"><?php echo  $fechaSoli?></td>
                                             <td style="text-align: center;"><?php echo $col2 ?></td>
                                             <td style="text-align: center;"><a href="mailto:joseantonio.garcia@itspozarica.edu.mx" class="btn btn-primary">CONTACTAR VIA CORREO</a></td>
                                         </tr>
@@ -200,6 +208,7 @@ $row = $globalsql->fetch_assoc();
                                         <tr style="background-color: #f97c46;color:#FFFFFF;text-align: center;">
                                             <th>Estado</th>
                                             <th>Nombre</th>
+                                            <th>Fecha de solicitud</th>
                                             <th>Accion</th>
                                             <th>Contactar</th>
                                         </tr>
@@ -213,8 +222,10 @@ $row = $globalsql->fetch_assoc();
                                         if ($archivosql1) {
                                             if (mysqli_num_rows($archivosql1) > 0) {
                                                 $col1 = $solicitado;
+                                                $fechaSoli = $archivorow1["fecha_solicitud"];
                                             } else {
                                                 $col1 = $nosolicitado;
+                                                $fechaSoli = "NO DISPONIBLE";
                                             }
                                         } else {
                                             echo 'Error';
@@ -237,6 +248,7 @@ $row = $globalsql->fetch_assoc();
                                         <tr>
                                             <td style="text-align: center;"><?php echo $col1; ?></td>
                                             <td style="text-align: center;"><?php echo $row["nombre"] . ' ' . $row["apellido_pat"] . ' ' . $row["apellido_mat"]; ?></td>
+                                            <td style="text-align: center;"><?php echo  $fechaSoli?></td>
                                             <td style="text-align: center;"><?php echo $col2 ?></td>
                                             <td style="text-align: center;"><a href="mailto:joseantonio.garcia@itspozarica.edu.mx" class="btn btn-primary">CONTACTAR VIA CORREO</a></td>
                                         </tr>
@@ -250,6 +262,7 @@ $row = $globalsql->fetch_assoc();
                                         <tr style="background-color: #f97c46;color:#FFFFFF;text-align: center;">
                                             <th>Estado</th>
                                             <th>Nombre</th>
+                                            <th>Fecha de solicitud</th>
                                             <th>Accion</th>
                                             <th>Contactar</th>
                                         </tr>
@@ -263,8 +276,10 @@ $row = $globalsql->fetch_assoc();
                                         if ($archivosql1) {
                                             if (mysqli_num_rows($archivosql1) > 0) {
                                                 $col1 = $solicitado;
+                                                $fechaSoli = $archivorow1["fecha_solicitud"];
                                             } else {
                                                 $col1 = $nosolicitado;
+                                                $fechaSoli = "NO DISPONIBLE";
                                             }
                                         } else {
                                             echo 'Error';
@@ -287,6 +302,7 @@ $row = $globalsql->fetch_assoc();
                                         <tr>
                                             <td style="text-align: center;"><?php echo $col1; ?></td>
                                             <td style="text-align: center;"><?php echo $row["nombre"] . ' ' . $row["apellido_pat"] . ' ' . $row["apellido_mat"]; ?></td>
+                                            <td style="text-align: center;"><?php echo  $fechaSoli?></td>
                                             <td style="text-align: center;"><?php echo $col2 ?></td>
                                             <td style="text-align: center;"><a href="mailto:joseantonio.garcia@itspozarica.edu.mx" class="btn btn-primary">CONTACTAR VIA CORREO</a></td>
                                         </tr>
@@ -300,6 +316,7 @@ $row = $globalsql->fetch_assoc();
                                         <tr style="background-color: #f97c46;color:#FFFFFF;text-align: center;">
                                             <th>Estado</th>
                                             <th>Nombre</th>
+                                            <th>Fecha de solicitud</th>
                                             <th>Accion</th>
                                             <th>Contactar</th>
                                         </tr>
@@ -313,8 +330,10 @@ $row = $globalsql->fetch_assoc();
                                         if ($archivosql1) {
                                             if (mysqli_num_rows($archivosql1) > 0) {
                                                 $col1 = $solicitado;
+                                                $fechaSoli = $archivorow1["fecha_solicitud"];
                                             } else {
                                                 $col1 = $nosolicitado;
+                                                $fechaSoli = "NO DISPONIBLE";
                                             }
                                         } else {
                                             echo 'Error';
@@ -337,6 +356,7 @@ $row = $globalsql->fetch_assoc();
                                         <tr>
                                             <td style="text-align: center;"><?php echo $col1; ?></td>
                                             <td style="text-align: center;"><?php echo $row["nombre"] . ' ' . $row["apellido_pat"] . ' ' . $row["apellido_mat"]; ?></td>
+                                            <td style="text-align: center;"><?php echo  $fechaSoli?></td>
                                             <td style="text-align: center;"><?php echo $col2 ?></td>
                                             <td style="text-align: center;"><a href="mailto:joseantonio.garcia@itspozarica.edu.mx" class="btn btn-primary">CONTACTAR VIA CORREO</a></td>
                                         </tr>
@@ -350,6 +370,7 @@ $row = $globalsql->fetch_assoc();
                                         <tr style="background-color: #f97c46;color:#FFFFFF;text-align: center;">
                                             <th>Estado</th>
                                             <th>Nombre</th>
+                                            <th>Fecha de solicitud</th>
                                             <th>Accion</th>
                                             <th>Contactar</th>
                                         </tr>
@@ -363,8 +384,10 @@ $row = $globalsql->fetch_assoc();
                                         if ($archivosql1) {
                                             if (mysqli_num_rows($archivosql1) > 0) {
                                                 $col1 = $solicitado;
+                                                $fechaSoli = $archivorow1["fecha_solicitud"];
                                             } else {
                                                 $col1 = $nosolicitado;
+                                                $fechaSoli = "NO DISPONIBLE";
                                             }
                                         } else {
                                             echo 'Error';
@@ -387,6 +410,7 @@ $row = $globalsql->fetch_assoc();
                                         <tr>
                                             <td style="text-align: center;"><?php echo $col1; ?></td>
                                             <td style="text-align: center;"><?php echo $row["nombre"] . ' ' . $row["apellido_pat"] . ' ' . $row["apellido_mat"]; ?></td>
+                                            <td style="text-align: center;"><?php echo  $fechaSoli?></td>
                                             <td style="text-align: center;"><?php echo $col2 ?></td>
                                             <td style="text-align: center;"><a href="mailto:joseantonio.garcia@itspozarica.edu.mx" class="btn btn-primary">CONTACTAR VIA CORREO</a></td>
                                         </tr>
@@ -400,6 +424,7 @@ $row = $globalsql->fetch_assoc();
                                         <tr style="background-color: #f97c46;color:#FFFFFF;text-align: center;">
                                             <th>Estado</th>
                                             <th>Nombre</th>
+                                            <th>Fecha de solicitud</th>
                                             <th>Accion</th>
                                             <th>Contactar</th>
                                         </tr>
@@ -414,8 +439,10 @@ $row = $globalsql->fetch_assoc();
                                         if ($archivosql1) {
                                             if (mysqli_num_rows($archivosql1) > 0) {
                                                 $col1 = $solicitado;
+                                                $fechaSoli = $archivorow1["fecha_solicitud"];
                                             } else {
                                                 $col1 = $nosolicitado;
+                                                $fechaSoli = "NO DISPONIBLE";
                                             }
                                         } else {
                                             echo 'Error';
@@ -438,6 +465,7 @@ $row = $globalsql->fetch_assoc();
                                         <tr>
                                             <td style="text-align: center;"><?php echo $col1; ?></td>
                                             <td style="text-align: center;"><?php echo $row["nombre"] . ' ' . $row["apellido_pat"] . ' ' . $row["apellido_mat"]; ?></td>
+                                            <td style="text-align: center;"><?php echo  $fechaSoli?></td>
                                             <td style="text-align: center;"><?php echo $col2 ?></td>
                                             <td style="text-align: center;"><a href="mailto:joseantonio.garcia@itspozarica.edu.mx" class="btn btn-primary">CONTACTAR VIA CORREO</a></td>
                                         </tr>
@@ -451,6 +479,7 @@ $row = $globalsql->fetch_assoc();
                                         <tr style="background-color: #f97c46;color:#FFFFFF;text-align: center;">
                                             <th>Estado</th>
                                             <th>Nombre</th>
+                                            <th>Fecha de solicitud</th>
                                             <th>Accion</th>
                                             <th>Contactar</th>
                                         </tr>
@@ -464,8 +493,10 @@ $row = $globalsql->fetch_assoc();
                                         if ($archivosql1) {
                                             if (mysqli_num_rows($archivosql1) > 0) {
                                                 $col1 = $solicitado;
+                                                $fechaSoli = $archivorow1["fecha_solicitud"];
                                             } else {
                                                 $col1 = $nosolicitado;
+                                                $fechaSoli = "NO DISPONIBLE";
                                             }
                                         } else {
                                             echo 'Error';
@@ -488,6 +519,7 @@ $row = $globalsql->fetch_assoc();
                                         <tr>
                                             <td style="text-align: center;"><?php echo $col1; ?></td>
                                             <td style="text-align: center;"><?php echo $row["nombre"] . ' ' . $row["apellido_pat"] . ' ' . $row["apellido_mat"]; ?></td>
+                                            <td style="text-align: center;"><?php echo  $fechaSoli?></td>
                                             <td style="text-align: center;"><?php echo $col2 ?></td>
                                             <td style="text-align: center;"><a href="mailto:joseantonio.garcia@itspozarica.edu.mx" class="btn btn-primary">CONTACTAR VIA CORREO</a></td>
                                         </tr>
@@ -501,6 +533,7 @@ $row = $globalsql->fetch_assoc();
                                         <tr style="background-color: #f97c46;color:#FFFFFF;text-align: center;">
                                             <th>Estado</th>
                                             <th>Nombre</th>
+                                            <th>Fecha de solicitud</th>
                                             <th>Accion</th>
                                             <th>Contactar</th>
                                         </tr>
@@ -514,8 +547,10 @@ $row = $globalsql->fetch_assoc();
                                         if ($archivosql1) {
                                             if (mysqli_num_rows($archivosql1) > 0) {
                                                 $col1 = $solicitado;
+                                                $fechaSoli = $archivorow1["fecha_solicitud"];
                                             } else {
                                                 $col1 = $nosolicitado;
+                                                $fechaSoli = "NO DISPONIBLE";
                                             }
                                         } else {
                                             echo 'Error';
@@ -538,6 +573,7 @@ $row = $globalsql->fetch_assoc();
                                         <tr>
                                             <td style="text-align: center;"><?php echo $col1; ?></td>
                                             <td style="text-align: center;"><?php echo $row["nombre"] . ' ' . $row["apellido_pat"] . ' ' . $row["apellido_mat"]; ?></td>
+                                            <td style="text-align: center;"><?php echo  $fechaSoli?></td>
                                             <td style="text-align: center;"><?php echo $col2 ?></td>
                                             <td style="text-align: center;"><a href="mailto:joseantonio.garcia@itspozarica.edu.mx" class="btn btn-primary">CONTACTAR VIA CORREO</a></td>
                                         </tr>
@@ -551,6 +587,7 @@ $row = $globalsql->fetch_assoc();
                                         <tr style="background-color: #f97c46;color:#FFFFFF;text-align: center;">
                                             <th>Estado</th>
                                             <th>Nombre</th>
+                                            <th>Fecha de solicitud</th>
                                             <th>Accion</th>
                                             <th>Contactar</th>
                                         </tr>
@@ -564,8 +601,10 @@ $row = $globalsql->fetch_assoc();
                                         if ($archivosql1) {
                                             if (mysqli_num_rows($archivosql1) > 0) {
                                                 $col1 = $solicitado;
+                                                $fechaSoli = $archivorow1["fecha_solicitud"];
                                             } else {
                                                 $col1 = $nosolicitado;
+                                                $fechaSoli = "NO DISPONIBLE";
                                             }
                                         } else {
                                             echo 'Error';
@@ -588,6 +627,7 @@ $row = $globalsql->fetch_assoc();
                                         <tr>
                                             <td style="text-align: center;"><?php echo $col1; ?></td>
                                             <td style="text-align: center;"><?php echo $row["nombre"] . ' ' . $row["apellido_pat"] . ' ' . $row["apellido_mat"]; ?></td>
+                                            <td style="text-align: center;"><?php echo  $fechaSoli?></td>
                                             <td style="text-align: center;"><?php echo $col2 ?></td>
                                             <td style="text-align: center;"><a href="mailto:joseantonio.garcia@itspozarica.edu.mx" class="btn btn-primary">CONTACTAR VIA CORREO</a></td>
                                         </tr>
@@ -601,6 +641,7 @@ $row = $globalsql->fetch_assoc();
                                         <tr style="background-color: #f97c46;color:#FFFFFF;text-align: center;">
                                             <th>Estado</th>
                                             <th>Nombre</th>
+                                            <th>Fecha de solicitud</th>
                                             <th>Accion</th>
                                             <th>Contactar</th>
                                         </tr>
@@ -614,8 +655,10 @@ $row = $globalsql->fetch_assoc();
                                         if ($archivosql1) {
                                             if (mysqli_num_rows($archivosql1) > 0) {
                                                 $col1 = $solicitado;
+                                                $fechaSoli = $archivorow1["fecha_solicitud"];
                                             } else {
                                                 $col1 = $nosolicitado;
+                                                $fechaSoli = "NO DISPONIBLE";
                                             }
                                         } else {
                                             echo 'Error';
@@ -639,6 +682,7 @@ $row = $globalsql->fetch_assoc();
                                         <tr>
                                             <td style="text-align: center;"><?php echo $col1; ?></td>
                                             <td style="text-align: center;"><?php echo $row["nombre"] . ' ' . $row["apellido_pat"] . ' ' . $row["apellido_mat"]; ?></td>
+                                            <td style="text-align: center;"><?php echo  $fechaSoli?></td>
                                             <td style="text-align: center;"><?php echo $col2 ?></td>
                                             <td style="text-align: center;"><a href="mailto:joseantonio.garcia@itspozarica.edu.mx" class="btn btn-primary">CONTACTAR VIA CORREO</a></td>
                                         </tr>

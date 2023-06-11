@@ -2,16 +2,17 @@
 require_once './services/ConexionBD.php';
 
 session_start();
-// Verificar si el usuario tiene permisos de administrador
-/*if (!isset($_SESSION['SesionIniciada']) || $_SESSION['tipo_usuario'] !== 'admin') {
-    header('Location: index.php');
-    exit;
-}*/
+$specifyID = isset($_GET['num_control']) ? $_GET['num_control'] : null;
 
+if (!isset($specifyID)) {
+    header('Location: aprobaciones.php');
+    exit;
+}
 // Obtener la lista de solicitudes de documentos de la tabla Solicitudes_alumno
-$query = "SELECT sa.Id_soli_a, sa.fecha_solicitud, a.Nombre, a.num_control, a.semestre_cursado, a.especialidad, sa.Tipo_documento, sa.Url_documento
+$query = "SELECT sa.Id_soli_a, sa.fecha_solicitud , a.Nombre, a.num_control, a.semestre_cursado, a.especialidad, sa.Tipo_documento, sa.Url_documento
           FROM Solicitudes_alumno sa
-          INNER JOIN alumno a ON sa.Id_alumno = a.num_control";
+          INNER JOIN alumno a ON sa.Id_alumno = a.num_control
+          WHERE sa.Id_alumno = '$specifyID'";
 $result = $con->query($query);
 
 ?>
@@ -55,9 +56,9 @@ $result = $con->query($query);
     </header>
 
     <div class="container mt-5">
-        <h2 style="color: #000;">Lista de Solicitudes de Documentos</h2>
+        <h2 style="color: #000;">HISTORIAL DEL ALUMNO CON N.C. <?php echo $specifyID ?> </h2>
         <div class="btn-group w-100 mb-2">
-            <a href="inicio-d.php" class="btn btn-success">Volver al inicio</a>
+            <a href="aprobaciones.php" class="btn btn-success">Volver</a>
 
         </div>
         <table class="table table-striped">
@@ -113,7 +114,7 @@ $result = $con->query($query);
         <!-- Pie de página -->
     </footer>
 
-    <!-- Modal Box para subir el documento -->
+<!-- Modal Box para subir el documento -->
     <div class="modal fade" id="modalUpload" tabindex="-1" role="dialog" aria-labelledby="modalUploadLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
