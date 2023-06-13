@@ -30,17 +30,25 @@
         <section class="textos-header">
             <h1><span>JEFATURA DE SISTEMAS PARA ALUMNOS</span></h1>
         </section>
-    </header>
-    <div class="imgDiv" style="
-    display: flex !important;
-    justify-content: center !important;;
-    height: 300px !important;
-">
-        <img src="assets/FONDO.jpg" alt="" style="
-    width: 907px;
-    height: 630px;
-">
+  <div id="slide-container" class="slide-container">
+    <div class="slide-container__slide-item slide-container__bgimg slide-container__fx"
+      style="background-image: url('assets/bg_slider1.png');">
     </div>
+
+    <div class="slide-container__slide-item slide-container__bgimg slide-container__fx"
+      style="background-image: url('assets/bg_slider2.jpg');">
+    </div>
+
+    <div class="slide-container__slide-item slide-container__bgimg slide-container__fx"
+      style="background-image: url('assets/bg_slider3.jpg');">
+    </div>
+
+    <div id="slide-container__slide-control" class="slide-container__slide-control">
+      <span class="slide-container__dot" onclick="chooseSlide(0)"></span>
+      <span class="slide-container__dot" onclick="chooseSlide(1)"></span>
+      <span class="slide-container__dot" onclick="chooseSlide(2)"></span>
+    </div>
+  </div>
 </body>
 
 </html>

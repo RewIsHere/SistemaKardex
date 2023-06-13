@@ -121,8 +121,10 @@ require_once 'services/ConexionBD.php';
                                                 <?php
                                                 if ($rowSql["aprobado"] == '0') {
                                                     $buttonText = 'APROBAR';
+                                                    $btnHistory = '<a></a>';
                                                 } else {
                                                     $buttonText = 'NO APROBAR';
+                                                    $btnHistory = '<a href="historial.php?num_control=' . $rowSql['num_control'] . '" class="btn btn-info" role="button">Historial</a>';
                                                 }
                                                 ?>
 
@@ -134,7 +136,7 @@ require_once 'services/ConexionBD.php';
                                                     <input type="hidden" name="num_control2" value="<?php echo $rowSql['num_control']; ?>">
                                                     <button type="submit" class="btn btn-danger">ELIMINAR</button>
                                                 </form>
-                                                    <a href="historial.php?num_control=<?php echo $rowSql['num_control']; ?>" class="btn btn-info" role="button">Historial</a>
+                                                    <?php echo $btnHistory?>
 
                                             </td>
                                         </tr>

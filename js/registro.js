@@ -1,6 +1,27 @@
 $("#formRegistro").on("submit", function (e) {
   e.preventDefault();
 
+  var archivo = $("input[type=file]")[0].files[0];
+  if (archivo && archivo.size > 2020000) {
+    // 1 megabyte = 1048576 bytes
+    $(document).ready(function () {
+      Swal.fire({
+        toast: true,
+        icon: "error",
+        title: "El archivo excede el tamaño máximo permitido (1MB).",
+        position: "top",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener("mouseenter", Swal.stopTimer);
+          toast.addEventListener("mouseleave", Swal.resumeTimer);
+        },
+      });
+    });
+    return;
+  }
+
   var formData = new FormData();
   let nombre = document.getElementById("nombre").value;
   let apellido_pat = document.getElementById("apellido_pat").value;
@@ -59,6 +80,7 @@ $("#formRegistro").on("submit", function (e) {
     success: function (response) {
       if (response == "success") {
         window.location.href = "login.php";
+        console.log("CORRECTO");
       } else if (response == "error") {
         $(document).ready(function () {
           Swal.fire({
@@ -75,6 +97,7 @@ $("#formRegistro").on("submit", function (e) {
             },
           });
         });
+        console.log("ERROR NUM CONTROL");
       } else if (response == "fatal_error") {
         $(document).ready(function () {
           Swal.fire({
@@ -91,6 +114,7 @@ $("#formRegistro").on("submit", function (e) {
             },
           });
         });
+        console.log("ERROR");
       }
     },
   });

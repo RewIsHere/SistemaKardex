@@ -57,7 +57,7 @@ if ($stmt = $con->prepare('SELECT * FROM JefeCarrera WHERE correo = ?')) {
     </header>
     <nav class="navtop">
         <div>
-            <h1>Panel de Jefe de Carrera</h1>
+            <h1>Panel de Administrativo</h1>
             <a href="logout.php"><i class="fas fa-sign-out-alt"></i>Cerrar Sesion</a>
         </div>
     </nav>

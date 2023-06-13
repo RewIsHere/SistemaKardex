@@ -2,18 +2,33 @@
 require_once 'services/ConexionBD.php';
 
 session_start();
-$uname = $_SESSION['correo'];
-
-if (isset($_SESSION['SesionIniciada'])) {
-    if ($stmt = $con->prepare('SELECT * FROM docente WHERE correo = ?')) {
+if (isset($_SESSION['SesionIniciada']) && isset($_SESSION['correo'])) {
+    $uname = $_SESSION['correo'];
+    if ($stmt = $con->prepare('SELECT * FROM JefeCarrera WHERE correo = ?')) {
         $stmt->bind_param('s', $uname);
         $stmt->execute();
         $stmt->store_result();
 
-        if ($stmt->num_rows == 0) {
-            header('Location: inicio.php');
-        } else {
+        if ($stmt->num_rows > 0) {
             header('Location: inicio-d.php');
+        
+        }
+
+        // CIERRA LA CONEXION CON LA BASE DE DATOS 
+        $stmt->close();
+    }
+}
+
+
+if (isset($_SESSION['SesionIniciada']) && isset($_SESSION['no_control'])) {
+$uname2 = $_SESSION['no_control'];
+    if ($stmt = $con->prepare('SELECT * FROM alumno WHERE num_control = ?')) {
+        $stmt->bind_param('s', $uname2);
+        $stmt->execute();
+        $stmt->store_result();
+
+        if ($stmt->num_rows > 0) {
+            header('Location: inicio.php');
         }
 
         // CIERRA LA CONEXION CON LA BASE DE DATOS 
@@ -59,7 +74,7 @@ if (isset($_SESSION['SesionIniciada'])) {
         <div class="contenedor1">
             <nav class="switch-cuenta">
                 <a href="login.php">ALUMNO</a>
-                <a href="#">JEFE DE CARRERA</a>
+                <a href="#">ADMINISTRATIVO</a>
             </nav>
             <div class="input-contenedor1">
                 <i class="fa-solid fa-person icon"></i>

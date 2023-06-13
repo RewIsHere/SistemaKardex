@@ -69,29 +69,39 @@ $row = $globalsql->fetch_assoc();
 
                                 </div>
 
-                                <form id="form-subir" class="form-subir" method="post" enctype="multipart/form-data">
-                                    <div class="contenedor_1">
-                                        <div class="form-group col-3">
-                                            <label class="pb-2">Tipo de Documento</label>
-                                            <select class="form-control" name="tipo_doc" id="tipo_doc">
-                                                <option value="Kardex">Kardex</option>
-                                                <option value="Calificaciones">Calificaciones</option>
-                                                <option value="Horario">Horario</option>
-                                                <option value="Materias">Materias</option>
-                                                <option value="Expediente">Expediente</option>
-                                                <option value="Inscripcion">Inscripcion</option>
-                                                <option value="Altas_y_Bajas">Altas y Bajas</option>
-                                                <option value="Creditos">Creditos</option>
-                                                <option value="Extra_Curriculares">Extra curriculares</option>
-                                                <option value="Justificantes">Justificantes</option>
-                                                <option value="Proyectos">Proyectos</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-1">
-                                            <input type="submit" class="btn " value="Solicitar" style="margin-top: 38px; background-color: purple; color: white;">
-                                        </div>
-                                    </div>
-                                </form>
+                               <div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <form id="form-subir" class="form-subir" method="post" enctype="multipart/form-data">
+        <div class="contenedor_1">
+          <div class="form-group">
+            <label class="pb-2">Tipo de Documento</label>
+            <select class="form-control" name="tipo_doc" id="tipo_doc">
+              <option value="Kardex">Kardex</option>
+              <option value="Calificaciones">Calificaciones</option>
+              <option value="Horario">Horario</option>
+              <option value="Materias">Materias</option>
+              <option value="Expediente">Expediente</option>
+              <option value="Inscripcion">Inscripcion</option>
+              <option value="Altas_y_Bajas">Altas y Bajas</option>
+              <option value="Creditos">Creditos</option>
+              <option value="Extra_Curriculares">Extra curriculares</option>
+              <option value="Justificantes">Justificantes</option>
+              <option value="Proyectos">Proyectos</option>
+            </select>
+          </div>
+          <input type="submit" class="btn btn-primary" value="Solicitar">
+        </div>
+      </form>
+    </div>
+    <div class="col-md-6">
+      <div class="descripcion_div" id="descripcion_div">
+      <h2>DESCRIPCION DEL DOCUMENTO:</h2>
+<div class="descripcion" id="descripcion" style="display: none;">
+      </div>      </div>
+    </div>
+  </div>
+</div>
                             </div>
                             <h1 class="archivo-title">Kardex</h1>
                             <div class="table-responsive">
