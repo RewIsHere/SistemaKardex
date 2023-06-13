@@ -45,8 +45,8 @@ body {
   float: left;
   color: var(--white);
   text-align: center;
-  text-decoration: none;
-  font-size: 18px;
+  text-decoration: underline;
+  font-size: 21px;
   font-weight: bold;
   line-height: 25px;
   padding: 12px;
@@ -173,4 +173,10 @@ body {
   text-align: center;
   padding: 15px;
   border-radius: 5px;
+}
+
+.form-control {
+  -webkit-appearance: auto !important;
+  -moz-appearance: auto !important;
+  appearance: auto !important;
 }

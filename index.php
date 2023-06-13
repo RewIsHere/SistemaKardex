@@ -28,11 +28,12 @@
             </ul>
         </div>
         <section class="textos-header">
-            <h1><span>JEFATURA DE SISTEMAS PARA ALUMNOS</span></h1>
+            <h1 class="titulo"><span>JEFATURA DE SISTEMAS PARA ALUMNOS</span></h1>
         </section>
+        </header>
   <div id="slide-container" class="slide-container">
     <div class="slide-container__slide-item slide-container__bgimg slide-container__fx"
-      style="background-image: url('assets/bg_slider1.png');">
+      style="background-image: url('assets/bg_slider1.jpg');">
     </div>
 
     <div class="slide-container__slide-item slide-container__bgimg slide-container__fx"
@@ -42,13 +43,29 @@
     <div class="slide-container__slide-item slide-container__bgimg slide-container__fx"
       style="background-image: url('assets/bg_slider3.jpg');">
     </div>
+    
+        <div class="slide-container__slide-item slide-container__bgimg slide-container__fx"
+      style="background-image: url('assets/bg_slider4.jpg');">
+    </div>
+    
+        <div class="slide-container__slide-item slide-container__bgimg slide-container__fx"
+      style="background-image: url('assets/bg_slider5.jpg');">
+    </div>
+    
+        <div class="slide-container__slide-item slide-container__bgimg slide-container__fx"
+      style="background-image: url('assets/bg_slider6.jpg');">
+    </div>
 
     <div id="slide-container__slide-control" class="slide-container__slide-control">
       <span class="slide-container__dot" onclick="chooseSlide(0)"></span>
       <span class="slide-container__dot" onclick="chooseSlide(1)"></span>
       <span class="slide-container__dot" onclick="chooseSlide(2)"></span>
+      <span class="slide-container__dot" onclick="chooseSlide(3)"></span>
+      <span class="slide-container__dot" onclick="chooseSlide(4)"></span>
+      <span class="slide-container__dot" onclick="chooseSlide(5)"></span>
     </div>
   </div>
+    <script src="js/index.js"></script>
 </body>
 
 </html>

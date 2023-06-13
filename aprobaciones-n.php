@@ -92,18 +92,18 @@ require_once 'services/ConexionBD.php';
                             <a href="inicio-d.php" class="btn btn-success">Volver al inicio</a>
 
                         </div>
+
  <div class="container">
     <div class="row">
       <div class="col-md-6">
-      <a href="#" class="btnAprobaciones btnActive">ALUMNOS NO APROBADOS</a>
+      <a href="aprobaciones.php" class="btnAprobaciones">ALUMNOS NO APROBADOS</a>
       </div>
       <div class="col-md-6">
-      <a href="aprobaciones-n.php" class="btnAprobaciones ">ALUMNOS APROBADOS</a>
+      <a href="#" class="btnAprobaciones btnActive">ALUMNOS APROBADOS</a>
       </div>
     </div>
   </div>
-
-                        <h4 class="card-title">Lista de alumnos No Aprobados</h4>
+                        <h4 class="card-title">Lista de alumnos Aprobados</h4>
 
                         <div class="table-responsive">
                             <table class="table">
@@ -121,7 +121,7 @@ require_once 'services/ConexionBD.php';
                                 <tbody>
                                     <?php
                                     // HACEMOS UN BUCLE PARA RELLENAR LA TABLA EN BASE AL QUERY ANTERIOR
-                                    $query = "SELECT * FROM alumno WHERE aprobado = '0'";
+                                    $query = "SELECT * FROM alumno WHERE aprobado != '0' ";
                                     $sql = $con->query($query);
                                     while ($rowSql = $sql->fetch_assoc()) {   ?>
 
@@ -136,12 +136,14 @@ require_once 'services/ConexionBD.php';
                                                 <?php
                                                 if ($rowSql["aprobado"] == '0') {
                                                     $buttonText = 'APROBAR';
+                                                    $btnHistory = '<a></a>';
                                                 } else {
                                                     $buttonText = 'NO APROBAR';
+                                                    $btnHistory = '<a href="historial.php?num_control=' . $rowSql['num_control'] . '" class="btn btn-info" role="button">Historial</a>';
                                                 }
                                                 ?>
 
-                                                <form action="includes/procesarAprobacion.php" method="post">
+                                                <form action="includes/procesarAprobacion-n.php" method="post">
                                                     <input type="hidden" name="num_control" value="<?php echo $rowSql['num_control']; ?>">
                                                     <button type="submit" class="btn btn-warning "><?php echo $buttonText; ?></button>
                                                 </form>
@@ -149,6 +151,7 @@ require_once 'services/ConexionBD.php';
                                                     <input type="hidden" name="num_control2" value="<?php echo $rowSql['num_control']; ?>">
                                                     <button type="submit" class="btn btn-danger">ELIMINAR</button>
                                                 </form>
+                                                    <?php echo $btnHistory?>
 
                                             </td>
                                         </tr>

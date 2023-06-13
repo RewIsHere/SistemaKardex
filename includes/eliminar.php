@@ -10,6 +10,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Realiza la actualización en la base de datos
 
+   $stmt = $con->prepare('DELETE FROM justificantes WHERE Id_alumno = ?');
+    $stmt->bind_param('s', $numControl);
+    $stmt->execute();
+    $stmt->close();
+
     $stmt = $con->prepare('DELETE FROM Solicitudes_alumno WHERE Id_alumno = ?');
     $stmt->bind_param('s', $numControl);
     $stmt->execute();

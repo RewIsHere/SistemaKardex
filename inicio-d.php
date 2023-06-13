@@ -65,6 +65,7 @@ if ($stmt = $con->prepare('SELECT * FROM JefeCarrera WHERE correo = ?')) {
         <h2>Inicio | Panel de Administrativo</h2>
         <p style="background-color: #607eff;">Bienvenido de nuevo, <?= $_SESSION['nombre'] ?>!</p>
         <p>VER LISTA DE ALUMNOS, <a class="btn btn-primary" href="aprobaciones.php">CLICK AQUI </a></p>
+        <p>VER LISTA DE JUSTIFICANTES, <a class="btn btn-primary" href="justificantes.php">CLICK AQUI </a></p>
         <p>VER LISTA DE SOLICITUDES DE DOCUMENTOS, <a class="btn btn-primary" href="lista_solicitudes.php">CLICK AQUI </a></p>
         <p>VER LISTA DE DOCUMENTOS ENVIADOS, <a class="btn btn-primary" href="archivos.php">CLICK AQUI </a></p>
     </div>

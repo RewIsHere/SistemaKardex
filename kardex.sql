@@ -4,6 +4,8 @@
 --Password: ljsn9hpFG3
 --Port number: 3306
 -- Jefaturasistemas123
+-- USUARIO: wixexob224@soremap.com
+-- PASS: 
 -- --------------------------------------------------------
 --
 -- Estructura de tabla para la tabla `alumno`
@@ -56,25 +58,26 @@ CREATE TABLE `Solicitudes_alumno` (
   REFERENCES `alumno`(`num_control`) 
 );
 
+
 CREATE TABLE `docs_alumno` (
   `Id_docs_a` int(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
-  `Creditos` varchar(200),
-  `Justificantes` varchar(200),
-  `Altas_y_Bajas` varchar(200),
-  `Id_alumno` varchar(15) NOT NULL UNIQUE,
-  `fecha_creditos` DATE NOT NULL,
-  `fecha_justi` DATE NOT NULL,
-  `fecha_altas` DATE NOT NULL,
+  `Tipo_documento` varchar(200),
+  `Url_documento` varchar(200),
+  `Id_alumno` varchar(15) NOT NULL,
+  `fecha_envio` DATE NOT NULL,
   FOREIGN KEY (`Id_alumno`)
   REFERENCES `alumno`(`num_control`) 
 );
 
-CREATE TABLE `conteo` (
-  `Id_conteo` int(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
+CREATE TABLE `justificantes` (
+  `Id_justificante` int(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
   `Id_alumno` varchar(15) NOT NULL,
-  `Tipo_documento` varchar(200) NOT NULL,
-  `Fecha_conteo` DATE NOT NULL,
-  `cantidad` int(11) NOT NULL,
+  `razon_justificante` varchar(200) NOT NULL,
+  `fecha_justificar` DATE NOT NULL,
+  `fecha_solicitud` DATE NOT NULL,
+  `archivos` varchar(200) NOT NULL,
+  `Url_justificante` varchar(200) NOT NULL,
+  `aprobado` int(1) NOT NULL,
   FOREIGN KEY (`Id_alumno`)
   REFERENCES `alumno`(`num_control`) 
 );

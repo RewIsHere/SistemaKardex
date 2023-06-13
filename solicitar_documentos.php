@@ -8,8 +8,10 @@ if (!isset($_SESSION['SesionIniciada'])) {
     exit;
 }
 
-$solicitado = '<span class="badge bg-primary">DOCUMENTADO SOLICITADO</span>';
-$nosolicitado = '<span class="badge bg-danger">DOCUMENTO NO SOLICITADO</span>';
+$solicitado = '<span class="badge bg-primary">DOCUMENTADO ENVIADO</span>';
+$nosolicitado = '<span class="badge bg-danger">DOCUMENTO NO ENVIADO</span>';
+$aprobado = '<span class="badge bg-primary">ACEPTADO</span>';
+$noaprobado = '<span class="badge bg-danger">RECHAZADO</span>';
 
 $uname = $_SESSION['no_control'];
 $globalquery = "SELECT * FROM alumno WHERE num_control ='" . $uname . "' ";
@@ -70,636 +72,499 @@ $row = $globalsql->fetch_assoc();
                                 </div>
 
                                <div class="container">
-  <div class="row">
-    <div class="col-md-6">
-      <form id="form-subir" class="form-subir" method="post" enctype="multipart/form-data">
-        <div class="contenedor_1">
-          <div class="form-group">
-            <label class="pb-2">Tipo de Documento</label>
-            <select class="form-control" name="tipo_doc" id="tipo_doc">
-              <option value="Kardex">Kardex</option>
-              <option value="Calificaciones">Calificaciones</option>
-              <option value="Horario">Horario</option>
-              <option value="Materias">Materias</option>
-              <option value="Expediente">Expediente</option>
-              <option value="Inscripcion">Inscripcion</option>
-              <option value="Altas_y_Bajas">Altas y Bajas</option>
-              <option value="Creditos">Creditos</option>
-              <option value="Extra_Curriculares">Extra curriculares</option>
-              <option value="Justificantes">Justificantes</option>
-              <option value="Proyectos">Proyectos</option>
-            </select>
-          </div>
-          <input type="submit" class="btn btn-primary" value="Solicitar">
+<div class="row">
+  <div class="col-md-6">
+    <form id="form-subir" class="form-subir" method="post" enctype="multipart/form-data">
+      <div class="contenedor_1">
+        <div class="form-group">
+          <label class="pb-2">Tipo de Documento</label>
+          <select class="form-control" name="tipo_doc" id="tipo_doc">
+            <option value="Kardex">Kardex</option>
+            <option value="Calificaciones">Calificaciones</option>
+            <option value="Horario">Horario</option>
+            <option value="Materias">Materias</option>
+            <option value="Expediente">Expediente</option>
+            <option value="Inscripcion">Inscripcion</option>
+            <option value="Altas_y_Bajas">Altas y Bajas</option>
+            <option value="Creditos">Creditos</option>
+            <option value="Extra_Curriculares">Extra curriculares</option>
+            <option value="Justificantes">Justificantes</option>
+            <option value="Proyectos">Proyectos</option>
+          </select>
         </div>
-      </form>
-    </div>
-    <div class="col-md-6">
-      <div class="descripcion_div" id="descripcion_div">
+        <div id="otros_campos" style="display: none;">
+          <div class="form-group">
+            <label for="texto">Razon</label>
+          <select class="form-control" name="texto" id="texto">
+            <option value="Cita_Medica">Cita Medica</option>
+            <option value="Motivos_Academicos">Motivos Academicos</option>
+            <option value="Enfermedad">Enfermedad</option>
+            <option value="Motivos_Familiares_Importantes">Motivos Familiares Importantes</option>
+            <option value="Asuntos_Religiosos">Asuntos Religiosos</option>
+            <option value="Deberes_Inexcusables">Deberes Inexcusables</option>
+            <option value="Fallecimiento_de_un_Familiar">Fallecimiento de un Familiar</option>
+            <option value="Enfermedad_de_un_Familiar">Enfermedad de un Familiar</option>
+            <option value="Asistencia_a_Pruebas_o_Entrevistas_para_el_Acceso_al_mundo_Laboral">Asistencia a Pruebas o Entrevistas para el Acceso al mundo Laboral</option>
+            <option value="Otras_causas_justificadas_tramitacion_de_documentos_oficiales_tales_como_ine,_pasaporte,_residencia,_etc">Otras causas justificadas: tramitacion de documentos oficiales tales como ine, pasaporte, residencia, etc</option>
+          </select>
+          </div>
+          <div class="form-group">
+            <label for="fecha">Fecha a Justificar</label>
+            <input type="date" class="form-control" id="fecha" name="fecha">
+          </div>
+          <div class="form-group">
+            <label for="archivos">Archivos</label>
+            <input type="file" class="form-control" id="archivos" name="archivos[]" multiple>
+          </div>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Solicitar">
+      </div>
+    </form>
+  </div>
+  <div class="col-md-6">
+    <div class="descripcion_div" id="descripcion_div">
       <h2>DESCRIPCION DEL DOCUMENTO:</h2>
-<div class="descripcion" id="descripcion" style="display: none;">
-      </div>      </div>
+      <div class="descripcion" id="descripcion" style="display: none;"></div>
     </div>
   </div>
 </div>
                             </div>
                             <h1 class="archivo-title">Kardex</h1>
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr style="background-color: #f97c46;color:#FFFFFF;text-align: center;">
-                                            <th>Estado</th>
-                                            <th>Nombre</th>
-                                            <th>Fecha de solicitud</th>
-                                            <th>Accion</th>
-                                            <th>Contactar</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="Solicitud_resi">
-                                        <?php
+ <div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr style="background-color: #f97c46;color:#FFFFFF;text-align: center;">
+                <th>Estado</th>
+                <th>Nombre</th>
+                <th>Fecha de solicitud</th>
+                <th>Accion</th>
+                <th>Contactar</th>
+            </tr>
+        </thead>
+        <tbody id="Solicitud_resi">
+            <?php
+            $archivoquery1 = "SELECT * FROM Solicitudes_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Tipo_documento = 'Kardex'";
+            $archivosql1 = $con->query($archivoquery1);
+            while ($archivorow1 = $archivosql1->fetch_assoc()) {
 
-                                        $archivoquery1 = "SELECT * FROM Solicitudes_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Tipo_documento = 'Kardex'";
-                                        $archivosql1 = $con->query($archivoquery1);
-                                        $archivorow1 = $archivosql1->fetch_assoc();
-                                        if ($archivosql1) {
-                                            if (mysqli_num_rows($archivosql1) > 0) {
-                                                $col1 = $solicitado;
-                                                $fechaSoli = $archivorow1["fecha_solicitud"];
-                                            } else {
-                                                $col1 = $nosolicitado;
-                                                $fechaSoli = 'NO DISPONIBLE';
-                                            }
-                                        } else {
-                                            echo 'Error';
-                                        }
+                if (empty($archivorow1["Url_documento"])) {
+                    $col1 = $nosolicitado;
+                    $col2 = "NO DISPONIBLE";
+                } else {
+                    $col1 = $solicitado;
+                    
+                    $col2 = '<a href="archivos/' . $archivorow1["Url_documento"] . '" class="btn btn-secondary" target="_blank">Ver Documento</a>';
+                }
+                ?>
 
-                                        $archivoquery2 = "SELECT * FROM Solicitudes_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Tipo_documento = 'Kardex' AND Url_documento != ''";
-                                        $archivosql2 = $con->query($archivoquery2);
-                                        if ($archivosql2) {
-                                            if (mysqli_num_rows($archivosql2) > 0) {
-                                                $archivorow2 = $archivosql2->fetch_assoc();
-                                                $col2 = '<a href="archivos/' . $archivorow2["Url_documento"] . '" class="btn btn-secondary" target="_blank">Ver Documento</a>';
-                                            } else {
-                                                $col2 = "NO DISPONIBLE";
-                                            }
-                                        } else {
-                                            echo 'Error';
-                                        }
-                                        ?>
-
-                                        <tr>
-                                            <td style="text-align: center;"><?php echo $col1; ?></td>
-                                            <td style="text-align: center;"><?php echo $row["nombre"] . ' ' . $row["apellido_pat"] . ' ' . $row["apellido_mat"]; ?></td>
-                                            <td style="text-align: center;"><?php echo  $fechaSoli?></td>
-                                            <td style="text-align: center;"><?php echo $col2 ?></td>
-                                            <td style="text-align: center;"><a href="mailto:joseantonio.garcia@itspozarica.edu.mx" class="btn btn-primary">CONTACTAR VIA CORREO</a></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                <tr>
+                    <td style="text-align: center;"><?php echo $col1; ?></td>
+                    <td style="text-align: center;"><?php echo $row["nombre"] . ' ' . $row["apellido_pat"] . ' ' . $row["apellido_mat"]; ?></td>
+                    <td style="text-align: center;"><?php echo $archivorow1["fecha_solicitud"]; ?></td>
+                    <td style="text-align: center;"><?php echo $col2 ?></td>
+                    <td style="text-align: center;"><a href="mailto:joseantonio.garcia@itspozarica.edu.mx" class="btn btn-primary">CONTACTAR VIA CORREO</a></td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+</div>
                             <h1 class="archivo-title">Calificaciones</h1>
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr style="background-color: #f97c46;color:#FFFFFF;text-align: center;">
-                                            <th>Estado</th>
-                                            <th>Nombre</th>
-                                            <th>Fecha de solicitud</th>
-                                            <th>Accion</th>
-                                            <th>Contactar</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="Solicitud_resi">
-                                        <?php
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr style="background-color: #f97c46;color:#FFFFFF;text-align: center;">
+                <th>Estado</th>
+                <th>Nombre</th>
+                <th>Fecha de solicitud</th>
+                <th>Accion</th>
+                <th>Contactar</th>
+            </tr>
+        </thead>
+        <tbody id="Solicitud_resi">
+            <?php
+            $archivoquery1 = "SELECT * FROM Solicitudes_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Tipo_documento = 'Calificaciones'";
+            $archivosql1 = $con->query($archivoquery1);
+            while ($archivorow1 = $archivosql1->fetch_assoc()) {
 
-                                        $archivoquery1 = "SELECT * FROM Solicitudes_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Tipo_documento = 'Calificaciones'";
-                                        $archivosql1 = $con->query($archivoquery1);
-                                        $archivorow1 = $archivosql1->fetch_assoc();
-                                        if ($archivosql1) {
-                                            if (mysqli_num_rows($archivosql1) > 0) {
-                                                $col1 = $solicitado;
-                                                $fechaSoli = $archivorow1["fecha_solicitud"];
-                                            } else {
-                                                $col1 = $nosolicitado;
-                                                $fechaSoli = "NO DISPONIBLE";
-                                            }
-                                        } else {
-                                            echo 'Error';
-                                        }
+                if (empty($archivorow1["Url_documento"])) {
+                    $col1 = $nosolicitado;
+                    $col2 = "NO DISPONIBLE";
+                } else {
+                    $col1 = $solicitado;
+                    
+                    $col2 = '<a href="archivos/' . $archivorow1["Url_documento"] . '" class="btn btn-secondary" target="_blank">Ver Documento</a>';
+                }
+                ?>
 
-                                        $archivoquery2 = "SELECT * FROM Solicitudes_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Tipo_documento = 'Calificaciones' AND Url_documento != ''";
-                                        $archivosql2 = $con->query($archivoquery2);
-                                        if ($archivosql2) {
-                                            if (mysqli_num_rows($archivosql2) > 0) {
-                                                $archivorow2 = $archivosql2->fetch_assoc();
-                                                $col2 = '<a href="archivos/' . $archivorow2["Url_documento"] . '" class="btn btn-secondary" target="_blank">Ver Documento</a>';
-                                            } else {
-                                                $col2 = "NO DISPONIBLE";
-                                            }
-                                        } else {
-                                            echo 'Error';
-                                        }
-                                        ?>
-
-                                        <tr>
-                                            <td style="text-align: center;"><?php echo $col1; ?></td>
-                                            <td style="text-align: center;"><?php echo $row["nombre"] . ' ' . $row["apellido_pat"] . ' ' . $row["apellido_mat"]; ?></td>
-                                            <td style="text-align: center;"><?php echo  $fechaSoli?></td>
-                                            <td style="text-align: center;"><?php echo $col2 ?></td>
-                                            <td style="text-align: center;"><a href="mailto:joseantonio.garcia@itspozarica.edu.mx" class="btn btn-primary">CONTACTAR VIA CORREO</a></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                <tr>
+                    <td style="text-align: center;"><?php echo $col1; ?></td>
+                    <td style="text-align: center;"><?php echo $row["nombre"] . ' ' . $row["apellido_pat"] . ' ' . $row["apellido_mat"]; ?></td>
+                    <td style="text-align: center;"><?php echo $archivorow1["fecha_solicitud"]; ?></td>
+                    <td style="text-align: center;"><?php echo $col2 ?></td>
+                    <td style="text-align: center;"><a href="mailto:joseantonio.garcia@itspozarica.edu.mx" class="btn btn-primary">CONTACTAR VIA CORREO</a></td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+</div>
                             <h1 class="archivo-title">Horario</h1>
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr style="background-color: #f97c46;color:#FFFFFF;text-align: center;">
-                                            <th>Estado</th>
-                                            <th>Nombre</th>
-                                            <th>Fecha de solicitud</th>
-                                            <th>Accion</th>
-                                            <th>Contactar</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="Solicitud_resi">
-                                        <?php
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr style="background-color: #f97c46;color:#FFFFFF;text-align: center;">
+                <th>Estado</th>
+                <th>Nombre</th>
+                <th>Fecha de solicitud</th>
+                <th>Accion</th>
+                <th>Contactar</th>
+            </tr>
+        </thead>
+        <tbody id="Solicitud_resi">
+            <?php
+            $archivoquery1 = "SELECT * FROM Solicitudes_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Tipo_documento = 'Horario'";
+            $archivosql1 = $con->query($archivoquery1);
+            while ($archivorow1 = $archivosql1->fetch_assoc()) {
 
-                                        $archivoquery1 = "SELECT * FROM Solicitudes_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Tipo_documento = 'Horario'";
-                                        $archivosql1 = $con->query($archivoquery1);
-                                        $archivorow1 = $archivosql1->fetch_assoc();
-                                        if ($archivosql1) {
-                                            if (mysqli_num_rows($archivosql1) > 0) {
-                                                $col1 = $solicitado;
-                                                $fechaSoli = $archivorow1["fecha_solicitud"];
-                                            } else {
-                                                $col1 = $nosolicitado;
-                                                $fechaSoli = "NO DISPONIBLE";
-                                            }
-                                        } else {
-                                            echo 'Error';
-                                        }
+                if (empty($archivorow1["Url_documento"])) {
+                    $col1 = $nosolicitado;
+                    $col2 = "NO DISPONIBLE";
+                } else {
+                    $col1 = $solicitado;
+                    
+                    $col2 = '<a href="archivos/' . $archivorow1["Url_documento"] . '" class="btn btn-secondary" target="_blank">Ver Documento</a>';
+                }
+                ?>
 
-                                        $archivoquery2 = "SELECT * FROM Solicitudes_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Tipo_documento = 'Horario' AND Url_documento != ''";
-                                        $archivosql2 = $con->query($archivoquery2);
-                                        if ($archivosql2) {
-                                            if (mysqli_num_rows($archivosql2) > 0) {
-                                                $archivorow2 = $archivosql2->fetch_assoc();
-                                                $col2 = '<a href="archivos/' . $archivorow2["Url_documento"] . '" class="btn btn-secondary" target="_blank">Ver Documento</a>';
-                                            } else {
-                                                $col2 = "NO DISPONIBLE";
-                                            }
-                                        } else {
-                                            echo 'Error';
-                                        }
-                                        ?>
-
-                                        <tr>
-                                            <td style="text-align: center;"><?php echo $col1; ?></td>
-                                            <td style="text-align: center;"><?php echo $row["nombre"] . ' ' . $row["apellido_pat"] . ' ' . $row["apellido_mat"]; ?></td>
-                                            <td style="text-align: center;"><?php echo  $fechaSoli?></td>
-                                            <td style="text-align: center;"><?php echo $col2 ?></td>
-                                            <td style="text-align: center;"><a href="mailto:joseantonio.garcia@itspozarica.edu.mx" class="btn btn-primary">CONTACTAR VIA CORREO</a></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                <tr>
+                    <td style="text-align: center;"><?php echo $col1; ?></td>
+                    <td style="text-align: center;"><?php echo $row["nombre"] . ' ' . $row["apellido_pat"] . ' ' . $row["apellido_mat"]; ?></td>
+                    <td style="text-align: center;"><?php echo $archivorow1["fecha_solicitud"]; ?></td>
+                    <td style="text-align: center;"><?php echo $col2 ?></td>
+                    <td style="text-align: center;"><a href="mailto:joseantonio.garcia@itspozarica.edu.mx" class="btn btn-primary">CONTACTAR VIA CORREO</a></td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+</div>
                             <h1 class="archivo-title">Materias</h1>
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr style="background-color: #f97c46;color:#FFFFFF;text-align: center;">
-                                            <th>Estado</th>
-                                            <th>Nombre</th>
-                                            <th>Fecha de solicitud</th>
-                                            <th>Accion</th>
-                                            <th>Contactar</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="Solicitud_resi">
-                                        <?php
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr style="background-color: #f97c46;color:#FFFFFF;text-align: center;">
+                <th>Estado</th>
+                <th>Nombre</th>
+                <th>Fecha de solicitud</th>
+                <th>Accion</th>
+                <th>Contactar</th>
+            </tr>
+        </thead>
+        <tbody id="Solicitud_resi">
+            <?php
+            $archivoquery1 = "SELECT * FROM Solicitudes_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Tipo_documento = 'Materias'";
+            $archivosql1 = $con->query($archivoquery1);
+            while ($archivorow1 = $archivosql1->fetch_assoc()) {
 
-                                        $archivoquery1 = "SELECT * FROM Solicitudes_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Tipo_documento = 'Materias'";
-                                        $archivosql1 = $con->query($archivoquery1);
-                                        $archivorow1 = $archivosql1->fetch_assoc();
-                                        if ($archivosql1) {
-                                            if (mysqli_num_rows($archivosql1) > 0) {
-                                                $col1 = $solicitado;
-                                                $fechaSoli = $archivorow1["fecha_solicitud"];
-                                            } else {
-                                                $col1 = $nosolicitado;
-                                                $fechaSoli = "NO DISPONIBLE";
-                                            }
-                                        } else {
-                                            echo 'Error';
-                                        }
+                if (empty($archivorow1["Url_documento"])) {
+                    $col1 = $nosolicitado;
+                    $col2 = "NO DISPONIBLE";
+                } else {
+                    $col1 = $solicitado;
+                    
+                    $col2 = '<a href="archivos/' . $archivorow1["Url_documento"] . '" class="btn btn-secondary" target="_blank">Ver Documento</a>';
+                }
+                ?>
 
-                                        $archivoquery2 = "SELECT * FROM Solicitudes_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Tipo_documento = 'Materias' AND Url_documento != ''";
-                                        $archivosql2 = $con->query($archivoquery2);
-                                        if ($archivosql2) {
-                                            if (mysqli_num_rows($archivosql2) > 0) {
-                                                $archivorow2 = $archivosql2->fetch_assoc();
-                                                $col2 = '<a href="archivos/' . $archivorow2["Url_documento"] . '" class="btn btn-secondary" target="_blank">Ver Documento</a>';
-                                            } else {
-                                                $col2 = "NO DISPONIBLE";
-                                            }
-                                        } else {
-                                            echo 'Error';
-                                        }
-                                        ?>
-
-                                        <tr>
-                                            <td style="text-align: center;"><?php echo $col1; ?></td>
-                                            <td style="text-align: center;"><?php echo $row["nombre"] . ' ' . $row["apellido_pat"] . ' ' . $row["apellido_mat"]; ?></td>
-                                            <td style="text-align: center;"><?php echo  $fechaSoli?></td>
-                                            <td style="text-align: center;"><?php echo $col2 ?></td>
-                                            <td style="text-align: center;"><a href="mailto:joseantonio.garcia@itspozarica.edu.mx" class="btn btn-primary">CONTACTAR VIA CORREO</a></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                <tr>
+                    <td style="text-align: center;"><?php echo $col1; ?></td>
+                    <td style="text-align: center;"><?php echo $row["nombre"] . ' ' . $row["apellido_pat"] . ' ' . $row["apellido_mat"]; ?></td>
+                    <td style="text-align: center;"><?php echo $archivorow1["fecha_solicitud"]; ?></td>
+                    <td style="text-align: center;"><?php echo $col2 ?></td>
+                    <td style="text-align: center;"><a href="mailto:joseantonio.garcia@itspozarica.edu.mx" class="btn btn-primary">CONTACTAR VIA CORREO</a></td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+</div>
                             <h1 class="archivo-title">Expediente</h1>
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr style="background-color: #f97c46;color:#FFFFFF;text-align: center;">
-                                            <th>Estado</th>
-                                            <th>Nombre</th>
-                                            <th>Fecha de solicitud</th>
-                                            <th>Accion</th>
-                                            <th>Contactar</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="Solicitud_resi">
-                                        <?php
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr style="background-color: #f97c46;color:#FFFFFF;text-align: center;">
+                <th>Estado</th>
+                <th>Nombre</th>
+                <th>Fecha de solicitud</th>
+                <th>Accion</th>
+                <th>Contactar</th>
+            </tr>
+        </thead>
+        <tbody id="Solicitud_resi">
+            <?php
+            $archivoquery1 = "SELECT * FROM Solicitudes_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Tipo_documento = 'Expediente'";
+            $archivosql1 = $con->query($archivoquery1);
+            while ($archivorow1 = $archivosql1->fetch_assoc()) {
 
-                                        $archivoquery1 = "SELECT * FROM Solicitudes_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Tipo_documento = 'Expediente'";
-                                        $archivosql1 = $con->query($archivoquery1);
-                                        $archivorow1 = $archivosql1->fetch_assoc();
-                                        if ($archivosql1) {
-                                            if (mysqli_num_rows($archivosql1) > 0) {
-                                                $col1 = $solicitado;
-                                                $fechaSoli = $archivorow1["fecha_solicitud"];
-                                            } else {
-                                                $col1 = $nosolicitado;
-                                                $fechaSoli = "NO DISPONIBLE";
-                                            }
-                                        } else {
-                                            echo 'Error';
-                                        }
+                if (empty($archivorow1["Url_documento"])) {
+                    $col1 = $nosolicitado;
+                    $col2 = "NO DISPONIBLE";
+                } else {
+                    $col1 = $solicitado;
+                    
+                    $col2 = '<a href="archivos/' . $archivorow1["Url_documento"] . '" class="btn btn-secondary" target="_blank">Ver Documento</a>';
+                }
+                ?>
 
-                                        $archivoquery2 = "SELECT * FROM Solicitudes_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Tipo_documento = 'Expediente' AND Url_documento != ''";
-                                        $archivosql2 = $con->query($archivoquery2);
-                                        if ($archivosql2) {
-                                            if (mysqli_num_rows($archivosql2) > 0) {
-                                                $archivorow2 = $archivosql2->fetch_assoc();
-                                                $col2 = '<a href="archivos/' . $archivorow2["Url_documento"] . '" class="btn btn-secondary" target="_blank">Ver Documento</a>';
-                                            } else {
-                                                $col2 = "NO DISPONIBLE";
-                                            }
-                                        } else {
-                                            echo 'Error';
-                                        }
-                                        ?>
-
-                                        <tr>
-                                            <td style="text-align: center;"><?php echo $col1; ?></td>
-                                            <td style="text-align: center;"><?php echo $row["nombre"] . ' ' . $row["apellido_pat"] . ' ' . $row["apellido_mat"]; ?></td>
-                                            <td style="text-align: center;"><?php echo  $fechaSoli?></td>
-                                            <td style="text-align: center;"><?php echo $col2 ?></td>
-                                            <td style="text-align: center;"><a href="mailto:joseantonio.garcia@itspozarica.edu.mx" class="btn btn-primary">CONTACTAR VIA CORREO</a></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                <tr>
+                    <td style="text-align: center;"><?php echo $col1; ?></td>
+                    <td style="text-align: center;"><?php echo $row["nombre"] . ' ' . $row["apellido_pat"] . ' ' . $row["apellido_mat"]; ?></td>
+                    <td style="text-align: center;"><?php echo $archivorow1["fecha_solicitud"]; ?></td>
+                    <td style="text-align: center;"><?php echo $col2 ?></td>
+                    <td style="text-align: center;"><a href="mailto:joseantonio.garcia@itspozarica.edu.mx" class="btn btn-primary">CONTACTAR VIA CORREO</a></td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+</div>
                             <h1 class="archivo-title">Inscripcion</h1>
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr style="background-color: #f97c46;color:#FFFFFF;text-align: center;">
-                                            <th>Estado</th>
-                                            <th>Nombre</th>
-                                            <th>Fecha de solicitud</th>
-                                            <th>Accion</th>
-                                            <th>Contactar</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="Solicitud_resi">
-                                        <?php
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr style="background-color: #f97c46;color:#FFFFFF;text-align: center;">
+                <th>Estado</th>
+                <th>Nombre</th>
+                <th>Fecha de solicitud</th>
+                <th>Accion</th>
+                <th>Contactar</th>
+            </tr>
+        </thead>
+        <tbody id="Solicitud_resi">
+            <?php
+            $archivoquery1 = "SELECT * FROM Solicitudes_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Tipo_documento = 'Inscripcion'";
+            $archivosql1 = $con->query($archivoquery1);
+            while ($archivorow1 = $archivosql1->fetch_assoc()) {
 
-                                        $archivoquery1 = "SELECT * FROM Solicitudes_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Tipo_documento = 'Inscripcion'";
-                                        $archivosql1 = $con->query($archivoquery1);
-                                        $archivorow1 = $archivosql1->fetch_assoc();
-                                        if ($archivosql1) {
-                                            if (mysqli_num_rows($archivosql1) > 0) {
-                                                $col1 = $solicitado;
-                                                $fechaSoli = $archivorow1["fecha_solicitud"];
-                                            } else {
-                                                $col1 = $nosolicitado;
-                                                $fechaSoli = "NO DISPONIBLE";
-                                            }
-                                        } else {
-                                            echo 'Error';
-                                        }
+                if (empty($archivorow1["Url_documento"])) {
+                    $col1 = $nosolicitado;
+                    $col2 = "NO DISPONIBLE";
+                } else {
+                    $col1 = $solicitado;
+                    
+                    $col2 = '<a href="archivos/' . $archivorow1["Url_documento"] . '" class="btn btn-secondary" target="_blank">Ver Documento</a>';
+                }
+                ?>
 
-                                        $archivoquery2 = "SELECT * FROM Solicitudes_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Tipo_documento = 'Inscripcion' AND Url_documento != ''";
-                                        $archivosql2 = $con->query($archivoquery2);
-                                        if ($archivosql2) {
-                                            if (mysqli_num_rows($archivosql2) > 0) {
-                                                $archivorow2 = $archivosql2->fetch_assoc();
-                                                $col2 = '<a href="archivos/' . $archivorow2["Url_documento"] . '" class="btn btn-secondary" target="_blank">Ver Documento</a>';
-                                            } else {
-                                                $col2 = "NO DISPONIBLE";
-                                            }
-                                        } else {
-                                            echo 'Error';
-                                        }
-                                        ?>
-
-                                        <tr>
-                                            <td style="text-align: center;"><?php echo $col1; ?></td>
-                                            <td style="text-align: center;"><?php echo $row["nombre"] . ' ' . $row["apellido_pat"] . ' ' . $row["apellido_mat"]; ?></td>
-                                            <td style="text-align: center;"><?php echo  $fechaSoli?></td>
-                                            <td style="text-align: center;"><?php echo $col2 ?></td>
-                                            <td style="text-align: center;"><a href="mailto:joseantonio.garcia@itspozarica.edu.mx" class="btn btn-primary">CONTACTAR VIA CORREO</a></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                <tr>
+                    <td style="text-align: center;"><?php echo $col1; ?></td>
+                    <td style="text-align: center;"><?php echo $row["nombre"] . ' ' . $row["apellido_pat"] . ' ' . $row["apellido_mat"]; ?></td>
+                    <td style="text-align: center;"><?php echo $archivorow1["fecha_solicitud"]; ?></td>
+                    <td style="text-align: center;"><?php echo $col2 ?></td>
+                    <td style="text-align: center;"><a href="mailto:joseantonio.garcia@itspozarica.edu.mx" class="btn btn-primary">CONTACTAR VIA CORREO</a></td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+</div>
                             <h1 class="archivo-title">Altas y Bajas</h1>
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr style="background-color: #f97c46;color:#FFFFFF;text-align: center;">
-                                            <th>Estado</th>
-                                            <th>Nombre</th>
-                                            <th>Fecha de solicitud</th>
-                                            <th>Accion</th>
-                                            <th>Contactar</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="Solicitud_resi">
-                                        <?php
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr style="background-color: #f97c46;color:#FFFFFF;text-align: center;">
+                <th>Estado</th>
+                <th>Nombre</th>
+                <th>Fecha de solicitud</th>
+                <th>Accion</th>
+                <th>Contactar</th>
+            </tr>
+        </thead>
+        <tbody id="Solicitud_resi">
+            <?php
+            $archivoquery1 = "SELECT * FROM Solicitudes_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Tipo_documento = 'Altas_y_Bajas'";
+            $archivosql1 = $con->query($archivoquery1);
+            while ($archivorow1 = $archivosql1->fetch_assoc()) {
 
+                if (empty($archivorow1["Url_documento"])) {
+                    $col1 = $nosolicitado;
+                    $col2 = "NO DISPONIBLE";
+                } else {
+                    $col1 = $solicitado;
+                    
+                    $col2 = '<a href="archivos/' . $archivorow1["Url_documento"] . '" class="btn btn-secondary" target="_blank">Ver Documento</a>';
+                }
+                ?>
 
-                                        $archivoquery1 = "SELECT * FROM Solicitudes_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Tipo_documento = 'Altas_y_Bajas'";
-                                        $archivosql1 = $con->query($archivoquery1);
-                                        $archivorow1 = $archivosql1->fetch_assoc();
-                                        if ($archivosql1) {
-                                            if (mysqli_num_rows($archivosql1) > 0) {
-                                                $col1 = $solicitado;
-                                                $fechaSoli = $archivorow1["fecha_solicitud"];
-                                            } else {
-                                                $col1 = $nosolicitado;
-                                                $fechaSoli = "NO DISPONIBLE";
-                                            }
-                                        } else {
-                                            echo 'Error';
-                                        }
-
-                                        $archivoquery2 = "SELECT * FROM Solicitudes_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Tipo_documento = 'Altas_y_Bajas' AND Url_documento != ''";
-                                        $archivosql2 = $con->query($archivoquery2);
-                                        if ($archivosql2) {
-                                            if (mysqli_num_rows($archivosql2) > 0) {
-                                                $archivorow2 = $archivosql2->fetch_assoc();
-                                                $col2 = '<a href="archivos/' . $archivorow2["Url_documento"] . '" class="btn btn-secondary" target="_blank">Ver Documento</a>';
-                                            } else {
-                                                $col2 = "NO DISPONIBLE";
-                                            }
-                                        } else {
-                                            echo 'Error';
-                                        }
-                                        ?>
-
-                                        <tr>
-                                            <td style="text-align: center;"><?php echo $col1; ?></td>
-                                            <td style="text-align: center;"><?php echo $row["nombre"] . ' ' . $row["apellido_pat"] . ' ' . $row["apellido_mat"]; ?></td>
-                                            <td style="text-align: center;"><?php echo  $fechaSoli?></td>
-                                            <td style="text-align: center;"><?php echo $col2 ?></td>
-                                            <td style="text-align: center;"><a href="mailto:joseantonio.garcia@itspozarica.edu.mx" class="btn btn-primary">CONTACTAR VIA CORREO</a></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                <tr>
+                    <td style="text-align: center;"><?php echo $col1; ?></td>
+                    <td style="text-align: center;"><?php echo $row["nombre"] . ' ' . $row["apellido_pat"] . ' ' . $row["apellido_mat"]; ?></td>
+                    <td style="text-align: center;"><?php echo $archivorow1["fecha_solicitud"]; ?></td>
+                    <td style="text-align: center;"><?php echo $col2 ?></td>
+                    <td style="text-align: center;"><a href="mailto:joseantonio.garcia@itspozarica.edu.mx" class="btn btn-primary">CONTACTAR VIA CORREO</a></td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+</div>
                             <h1 class="archivo-title">Creditos</h1>
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr style="background-color: #f97c46;color:#FFFFFF;text-align: center;">
-                                            <th>Estado</th>
-                                            <th>Nombre</th>
-                                            <th>Fecha de solicitud</th>
-                                            <th>Accion</th>
-                                            <th>Contactar</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="Solicitud_resi">
-                                        <?php
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr style="background-color: #f97c46;color:#FFFFFF;text-align: center;">
+                <th>Estado</th>
+                <th>Nombre</th>
+                <th>Fecha de solicitud</th>
+                <th>Accion</th>
+                <th>Contactar</th>
+            </tr>
+        </thead>
+        <tbody id="Solicitud_resi">
+            <?php
+            $archivoquery1 = "SELECT * FROM Solicitudes_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Tipo_documento = 'Creditos'";
+            $archivosql1 = $con->query($archivoquery1);
+            while ($archivorow1 = $archivosql1->fetch_assoc()) {
 
-                                        $archivoquery1 = "SELECT * FROM Solicitudes_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Tipo_documento = 'Creditos'";
-                                        $archivosql1 = $con->query($archivoquery1);
-                                        $archivorow1 = $archivosql1->fetch_assoc();
-                                        if ($archivosql1) {
-                                            if (mysqli_num_rows($archivosql1) > 0) {
-                                                $col1 = $solicitado;
-                                                $fechaSoli = $archivorow1["fecha_solicitud"];
-                                            } else {
-                                                $col1 = $nosolicitado;
-                                                $fechaSoli = "NO DISPONIBLE";
-                                            }
-                                        } else {
-                                            echo 'Error';
-                                        }
+                if (empty($archivorow1["Url_documento"])) {
+                    $col1 = $nosolicitado;
+                    $col2 = "NO DISPONIBLE";
+                } else {
+                    $col1 = $solicitado;
+                    
+                    $col2 = '<a href="archivos/' . $archivorow1["Url_documento"] . '" class="btn btn-secondary" target="_blank">Ver Documento</a>';
+                }
+                ?>
 
-                                        $archivoquery2 = "SELECT * FROM Solicitudes_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Tipo_documento = 'Creditos' AND Url_documento != ''";
-                                        $archivosql2 = $con->query($archivoquery2);
-                                        if ($archivosql2) {
-                                            if (mysqli_num_rows($archivosql2) > 0) {
-                                                $archivorow2 = $archivosql2->fetch_assoc();
-                                                $col2 = '<a href="archivos/' . $archivorow2["Url_documento"] . '" class="btn btn-secondary" target="_blank">Ver Documento</a>';
-                                            } else {
-                                                $col2 = "NO DISPONIBLE";
-                                            }
-                                        } else {
-                                            echo 'Error';
-                                        }
-                                        ?>
-
-                                        <tr>
-                                            <td style="text-align: center;"><?php echo $col1; ?></td>
-                                            <td style="text-align: center;"><?php echo $row["nombre"] . ' ' . $row["apellido_pat"] . ' ' . $row["apellido_mat"]; ?></td>
-                                            <td style="text-align: center;"><?php echo  $fechaSoli?></td>
-                                            <td style="text-align: center;"><?php echo $col2 ?></td>
-                                            <td style="text-align: center;"><a href="mailto:joseantonio.garcia@itspozarica.edu.mx" class="btn btn-primary">CONTACTAR VIA CORREO</a></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                <tr>
+                    <td style="text-align: center;"><?php echo $col1; ?></td>
+                    <td style="text-align: center;"><?php echo $row["nombre"] . ' ' . $row["apellido_pat"] . ' ' . $row["apellido_mat"]; ?></td>
+                    <td style="text-align: center;"><?php echo $archivorow1["fecha_solicitud"]; ?></td>
+                    <td style="text-align: center;"><?php echo $col2 ?></td>
+                    <td style="text-align: center;"><a href="mailto:joseantonio.garcia@itspozarica.edu.mx" class="btn btn-primary">CONTACTAR VIA CORREO</a></td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+</div>
                             <h1 class="archivo-title">Extra curriculares</h1>
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr style="background-color: #f97c46;color:#FFFFFF;text-align: center;">
-                                            <th>Estado</th>
-                                            <th>Nombre</th>
-                                            <th>Fecha de solicitud</th>
-                                            <th>Accion</th>
-                                            <th>Contactar</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="Solicitud_resi">
-                                        <?php
+ <div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr style="background-color: #f97c46;color:#FFFFFF;text-align: center;">
+                <th>Estado</th>
+                <th>Nombre</th>
+                <th>Fecha de solicitud</th>
+                <th>Accion</th>
+                <th>Contactar</th>
+            </tr>
+        </thead>
+        <tbody id="Solicitud_resi">
+            <?php
+            $archivoquery1 = "SELECT * FROM Solicitudes_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Tipo_documento = 'Extra_Curriculares'";
+            $archivosql1 = $con->query($archivoquery1);
+            while ($archivorow1 = $archivosql1->fetch_assoc()) {
 
-                                        $archivoquery1 = "SELECT * FROM Solicitudes_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Tipo_documento = 'Extra_Curriculares'";
-                                        $archivosql1 = $con->query($archivoquery1);
-                                        $archivorow1 = $archivosql1->fetch_assoc();
-                                        if ($archivosql1) {
-                                            if (mysqli_num_rows($archivosql1) > 0) {
-                                                $col1 = $solicitado;
-                                                $fechaSoli = $archivorow1["fecha_solicitud"];
-                                            } else {
-                                                $col1 = $nosolicitado;
-                                                $fechaSoli = "NO DISPONIBLE";
-                                            }
-                                        } else {
-                                            echo 'Error';
-                                        }
+                if (empty($archivorow1["Url_documento"])) {
+                    $col1 = $nosolicitado;
+                    $col2 = "NO DISPONIBLE";
+                } else {
+                    $col1 = $solicitado;
+                    
+                    $col2 = '<a href="archivos/' . $archivorow1["Url_documento"] . '" class="btn btn-secondary" target="_blank">Ver Documento</a>';
+                }
+                ?>
 
-                                        $archivoquery2 = "SELECT * FROM Solicitudes_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Tipo_documento = 'Extra_Curriculares' AND Url_documento != ''";
-                                        $archivosql2 = $con->query($archivoquery2);
-                                        if ($archivosql2) {
-                                            if (mysqli_num_rows($archivosql2) > 0) {
-                                                $archivorow2 = $archivosql2->fetch_assoc();
-                                                $col2 = '<a href="archivos/' . $archivorow2["Url_documento"] . '" class="btn btn-secondary" target="_blank">Ver Documento</a>';
-                                            } else {
-                                                $col2 = "NO DISPONIBLE";
-                                            }
-                                        } else {
-                                            echo 'Error';
-                                        }
-                                        ?>
+                <tr>
+                    <td style="text-align: center;"><?php echo $col1; ?></td>
+                    <td style="text-align: center;"><?php echo $row["nombre"] . ' ' . $row["apellido_pat"] . ' ' . $row["apellido_mat"]; ?></td>
+                    <td style="text-align: center;"><?php echo $archivorow1["fecha_solicitud"]; ?></td>
+                    <td style="text-align: center;"><?php echo $col2 ?></td>
+                    <td style="text-align: center;"><a href="mailto:joseantonio.garcia@itspozarica.edu.mx" class="btn btn-primary">CONTACTAR VIA CORREO</a></td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+</div>
+<h1 class="archivo-title">Justificantes</h1>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr style="background-color: #f97c46;color:#FFFFFF;text-align: center;">
+                <th>Nombre</th>
+                <th>Fecha de solicitud</th>
+                <th>Fecha a Justificar</th>
+                <th>Aprobado</th>
+                <th>Accion</th>
+                <th>Contactar</th>
+            </tr>
+        </thead>
+        <tbody id="Solicitud_resi">
+            <?php
+            $archivoquery1 = "SELECT * FROM justificantes WHERE Id_alumno ='" . $row["num_control"] . "'";
+            $archivosql1 = $con->query($archivoquery1);
+            while ($archivorow1 = $archivosql1->fetch_assoc()) {
 
-                                        <tr>
-                                            <td style="text-align: center;"><?php echo $col1; ?></td>
-                                            <td style="text-align: center;"><?php echo $row["nombre"] . ' ' . $row["apellido_pat"] . ' ' . $row["apellido_mat"]; ?></td>
-                                            <td style="text-align: center;"><?php echo  $fechaSoli?></td>
-                                            <td style="text-align: center;"><?php echo $col2 ?></td>
-                                            <td style="text-align: center;"><a href="mailto:joseantonio.garcia@itspozarica.edu.mx" class="btn btn-primary">CONTACTAR VIA CORREO</a></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <h1 class="archivo-title">Justificantes</h1>
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr style="background-color: #f97c46;color:#FFFFFF;text-align: center;">
-                                            <th>Estado</th>
-                                            <th>Nombre</th>
-                                            <th>Fecha de solicitud</th>
-                                            <th>Accion</th>
-                                            <th>Contactar</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="Solicitud_resi">
-                                        <?php
+                if (empty($archivorow1["Url_justificante"])) {
+                    $col2 = "NO DISPONIBLE";
+                } else {
+                    
+                    $col2 = '<a href="archivos/' . $archivorow1["Url_justificante"] . '" class="btn btn-secondary" target="_blank">Ver Justificante</a>';
+                }
+                
+                if ($archivorow1["aprobado"] == 0) {
+                    $colxd = $noaprobado;
+                } else {
+                    $colxd = $aprobado;
+                                    }
+                ?>
 
-                                        $archivoquery1 = "SELECT * FROM Solicitudes_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Tipo_documento = 'Justificantes'";
-                                        $archivosql1 = $con->query($archivoquery1);
-                                        $archivorow1 = $archivosql1->fetch_assoc();
-                                        if ($archivosql1) {
-                                            if (mysqli_num_rows($archivosql1) > 0) {
-                                                $col1 = $solicitado;
-                                                $fechaSoli = $archivorow1["fecha_solicitud"];
-                                            } else {
-                                                $col1 = $nosolicitado;
-                                                $fechaSoli = "NO DISPONIBLE";
-                                            }
-                                        } else {
-                                            echo 'Error';
-                                        }
-
-                                        $archivoquery2 = "SELECT * FROM Solicitudes_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Tipo_documento = 'Justificantes' AND Url_documento != ''";
-                                        $archivosql2 = $con->query($archivoquery2);
-                                        if ($archivosql2) {
-                                            if (mysqli_num_rows($archivosql2) > 0) {
-                                                $archivorow2 = $archivosql2->fetch_assoc();
-                                                $col2 = '<a href="archivos/' . $archivorow2["Url_documento"] . '" class="btn btn-secondary" target="_blank">Ver Documento</a>';
-                                            } else {
-                                                $col2 = "NO DISPONIBLE";
-                                            }
-                                        } else {
-                                            echo 'Error';
-                                        }
-                                        ?>
-
-                                        <tr>
-                                            <td style="text-align: center;"><?php echo $col1; ?></td>
-                                            <td style="text-align: center;"><?php echo $row["nombre"] . ' ' . $row["apellido_pat"] . ' ' . $row["apellido_mat"]; ?></td>
-                                            <td style="text-align: center;"><?php echo  $fechaSoli?></td>
-                                            <td style="text-align: center;"><?php echo $col2 ?></td>
-                                            <td style="text-align: center;"><a href="mailto:joseantonio.garcia@itspozarica.edu.mx" class="btn btn-primary">CONTACTAR VIA CORREO</a></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                <tr>
+                    <td style="text-align: center;"><?php echo $row["nombre"] . ' ' . $row["apellido_pat"] . ' ' . $row["apellido_mat"]; ?></td>
+                    <td style="text-align: center;"><?php echo $archivorow1["fecha_solicitud"]; ?></td>
+                    <td style="text-align: center;"><?php echo $archivorow1["fecha_justificar"]; ?></td>
+                    <td style="text-align: center;"><?php echo $colxd ?></td>
+                    <td style="text-align: center;"><?php echo $col2 ?></td>
+                    <td style="text-align: center;"><a href="mailto:joseantonio.garcia@itspozarica.edu.mx" class="btn btn-primary">CONTACTAR VIA CORREO</a></td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+</div>
                             <h1 class="archivo-title">Proyectos</h1>
                             <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr style="background-color: #f97c46;color:#FFFFFF;text-align: center;">
-                                            <th>Estado</th>
-                                            <th>Nombre</th>
-                                            <th>Fecha de solicitud</th>
-                                            <th>Accion</th>
-                                            <th>Contactar</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="Solicitud_resi">
-                                        <?php
+    <table class="table">
+        <thead>
+            <tr style="background-color: #f97c46;color:#FFFFFF;text-align: center;">
+                <th>Estado</th>
+                <th>Nombre</th>
+                <th>Fecha de solicitud</th>
+                <th>Accion</th>
+                <th>Contactar</th>
+            </tr>
+        </thead>
+        <tbody id="Solicitud_resi">
+            <?php
+            $archivoquery1 = "SELECT * FROM Solicitudes_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Tipo_documento = 'Proyectos'";
+            $archivosql1 = $con->query($archivoquery1);
+            while ($archivorow1 = $archivosql1->fetch_assoc()) {
 
-                                        $archivoquery1 = "SELECT * FROM Solicitudes_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Tipo_documento = 'Proyectos'";
-                                        $archivosql1 = $con->query($archivoquery1);
-                                        $archivorow1 = $archivosql1->fetch_assoc();
-                                        if ($archivosql1) {
-                                            if (mysqli_num_rows($archivosql1) > 0) {
-                                                $col1 = $solicitado;
-                                                $fechaSoli = $archivorow1["fecha_solicitud"];
-                                            } else {
-                                                $col1 = $nosolicitado;
-                                                $fechaSoli = "NO DISPONIBLE";
-                                            }
-                                        } else {
-                                            echo 'Error';
-                                        }
+                if (empty($archivorow1["Url_documento"])) {
+                    $col1 = $nosolicitado;
+                    $col2 = "NO DISPONIBLE";
+                } else {
+                    $col1 = $solicitado;
+                    
+                    $col2 = '<a href="archivos/' . $archivorow1["Url_documento"] . '" class="btn btn-secondary" target="_blank">Ver Documento</a>';
+                }
+                ?>
 
-                                        $archivoquery2 = "SELECT * FROM Solicitudes_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Tipo_documento = 'Proyectos' AND Url_documento != ''";
-                                        $archivosql2 = $con->query($archivoquery2);
-                                        if ($archivosql2) {
-                                            if (mysqli_num_rows($archivosql2) > 0) {
-                                                $archivorow2 = $archivosql2->fetch_assoc();
-                                                $col2 = '<a href="archivos/' . $archivorow2["Url_documento"] . '" class="btn btn-secondary" target="_blank">Ver Documento</a>';
-                                            } else {
-                                                $col2 = "NO DISPONIBLE";
-                                            }
-                                        } else {
-                                            echo 'Error';
-                                        }
-                                        ?>
-
-
-                                        <tr>
-                                            <td style="text-align: center;"><?php echo $col1; ?></td>
-                                            <td style="text-align: center;"><?php echo $row["nombre"] . ' ' . $row["apellido_pat"] . ' ' . $row["apellido_mat"]; ?></td>
-                                            <td style="text-align: center;"><?php echo  $fechaSoli?></td>
-                                            <td style="text-align: center;"><?php echo $col2 ?></td>
-                                            <td style="text-align: center;"><a href="mailto:joseantonio.garcia@itspozarica.edu.mx" class="btn btn-primary">CONTACTAR VIA CORREO</a></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                <tr>
+                    <td style="text-align: center;"><?php echo $col1; ?></td>
+                    <td style="text-align: center;"><?php echo $row["nombre"] . ' ' . $row["apellido_pat"] . ' ' . $row["apellido_mat"]; ?></td>
+                    <td style="text-align: center;"><?php echo $archivorow1["fecha_solicitud"]; ?></td>
+                    <td style="text-align: center;"><?php echo $col2 ?></td>
+                    <td style="text-align: center;"><a href="mailto:joseantonio.garcia@itspozarica.edu.mx" class="btn btn-primary">CONTACTAR VIA CORREO</a></td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+</div>
+                           </div>
                     </div>
                 </div>
             </div>

@@ -92,6 +92,9 @@ $row = $globalsql->fetch_assoc();
                                         <tr style="background-color: #f97c46;color:#FFFFFF;text-align: center;">
                                             <th>Subido</th>
                                             <th>Nombre</th>
+                                            <th>Num. Control</th>
+                                            <th>Semestre</th>
+                                            <th>Especialidad</th>
                                             <th>Fecha de envio</th>
                                             <th>Accion</th>
                                         </tr>
@@ -99,35 +102,32 @@ $row = $globalsql->fetch_assoc();
                                     <tbody id="Creditos">
                                         <?php
 
-                                        $archivoquery1 = "SELECT Creditos, fecha_creditos FROM docs_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Creditos != ''";
+                                        $archivoquery1 = "SELECT * FROM docs_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Tipo_documento = 'Creditos'";
                                         $archivosql1 = $con->query($archivoquery1);
-                                        if ($archivosql1) {
+                                        while($archivorow1 = $archivosql1->fetch_assoc()) {
+
                                             if (mysqli_num_rows($archivosql1) > 0) {
-                                                $archivorow1 = $archivosql1->fetch_assoc();
                                                 $col1 = $subido;
-                                                $col2 = '<a href="archivos/' . $archivorow1["Creditos"] . '" target="_blank"  class="btn btn-warning" role="button">Abrir</a>';
-                                                $colf1 = $archivorow1["fecha_creditos"];
+                                                $col2 = '<a href="archivos/' . $archivorow1["Url_documento"] . '" target="_blank"  class="btn btn-warning" role="button">Abrir</a>';
+                                                $colf1 = $archivorow1["fecha_envio"];
                                             } else {
                                                 $col1 = $nosubido;
                                                 $col2 = 'NO DISPONIBLE';
                                                 $colf1 = 'NO DISPONIBLE';
                                             }
-                                        } else {
-                                            echo 'Error';
-                                        }
-
-
-
                                         ?>
 
                                         <tr>
                                             <td style="text-align: center;"><?php echo $col1; ?></td>
                                             <td style="text-align: center;"><?php echo $row["nombre"] . ' ' . $row["apellido_pat"] . ' ' . $row["apellido_mat"]; ?></td>
+                                            <td style="text-align: center;"><?php echo $row["num_control"]; ?></td>
+                                            <td style="text-align: center;"><?php echo $row["semestre_cursado"]; ?></td>
+                                            <td style="text-align: center;"><?php echo $row["especialidad"]; ?></td>
                                             <td style="text-align: center;"><?php echo $colf1 ?></td>
                                             <td style="text-align: center;"><?php echo $col2 ?></td>
                                         </tr>
 
-                                        <?php //} 
+                                        <?php } 
                                         ?>
                                     </tbody>
                                 </table>
@@ -139,6 +139,9 @@ $row = $globalsql->fetch_assoc();
                                         <tr style="background-color: #f97c46;color:#FFFFFF;text-align: center;">
                                             <th>Subido</th>
                                             <th>Nombre</th>
+                                            <th>Num. Control</th>
+                                            <th>Semestre</th>
+                                            <th>Especialidad</th>
                                             <th>Fecha de envio</th>
                                             <th>Accion</th>
                                         </tr>
@@ -146,31 +149,31 @@ $row = $globalsql->fetch_assoc();
                                     <tbody id="Justificantes">
                                         <?php
 
-                                        $archivoquery2 = "SELECT Justificantes, fecha_justi FROM docs_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Justificantes != ''";
+                                        $archivoquery2 = "SELECT * FROM docs_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Tipo_documento = 'Justificantes'";
                                         $archivosql2 = $con->query($archivoquery2);
-                                        if ($archivosql2) {
+                                        while($archivorow2 = $archivosql2->fetch_assoc()){
                                             if (mysqli_num_rows($archivosql2) > 0) {
-                                                $archivorow2 = $archivosql2->fetch_assoc();
                                                 $col3 = $subido;
-                                                $col4 = '<a href="archivos/' . $archivorow2["Justificantes"] . '" target="_blank" class="btn btn-warning" role="button">Abrir</a>';
-                                                $colf2 = $archivorow2["fecha_justi"];
+                                                $col4 = '<a href="archivos/' . $archivorow2["Url_documento"] . '" target="_blank" class="btn btn-warning" role="button">Abrir</a>';
+                                                $colf2 = $archivorow2["fecha_envio"];
                                             } else {
                                                 $col3 = $nosubido;
                                                 $col4 = 'NO DISPONIBLE';
                                                 $colf2 = 'NO DISPONIBLE';
                                             }
-                                        } else {
-                                            echo 'Error';
-                                        }
 
                                         ?>
 
                                         <tr>
                                             <td style="text-align: center;"><?php echo $col3;  ?></td>
                                             <td style="text-align: center;"><?php echo $row["nombre"] . ' ' . $row["apellido_pat"] . ' ' . $row["apellido_mat"]; ?></td>
+                                            <td style="text-align: center;"><?php echo $row["num_control"]; ?></td>
+                                            <td style="text-align: center;"><?php echo $row["semestre_cursado"]; ?></td>
+                                            <td style="text-align: center;"><?php echo $row["especialidad"]; ?></td>
                                             <td style="text-align: center;"><?php echo $colf2 ?></td>
                                             <td style="text-align: center;"><?php echo $col4 ?></td>
                                         </tr>
+                                        <?php }?>
                                     </tbody>
                                 </table>
                             </div>
@@ -181,6 +184,9 @@ $row = $globalsql->fetch_assoc();
                                         <tr style="background-color: #f97c46;color:#FFFFFF;text-align: center;">
                                             <th>Subido</th>
                                             <th>Nombre</th>
+                                            <th>Num. Control</th>
+                                            <th>Semestre</th>
+                                            <th>Especialidad</th>
                                             <th>Fecha de envio</th>
                                             <th>Accion</th>
                                         </tr>
@@ -188,31 +194,31 @@ $row = $globalsql->fetch_assoc();
                                     <tbody id="Altas_y_Bajas">
                                         <?php
 
-                                        $archivoquery3 = "SELECT Altas_y_Bajas, fecha_altas FROM docs_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Altas_y_Bajas != ''";
+                                        $archivoquery3 = "SELECT * FROM docs_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Tipo_documento = 'Altas_y_Bajas'";
                                         $archivosql3 = $con->query($archivoquery3);
-                                        if ($archivosql3) {
+                                        while($archivorow3 = $archivosql3->fetch_assoc()) {
                                             if (mysqli_num_rows($archivosql3) > 0) {
-                                                $archivorow3 = $archivosql3->fetch_assoc();
                                                 $col5 = $subido;
-                                                $col6 = '<a href="archivos/' . $archivorow3["Altas_y_Bajas"] . '" target="_blank" class="btn btn-warning" role="button">Abrir</a>';
-                                                $colf3 = $archivorow3["fecha_altas"];
+                                                $col6 = '<a href="archivos/' . $archivorow3["Url_documento"] . '" target="_blank" class="btn btn-warning" role="button">Abrir</a>';
+                                                $colf3 = $archivorow3["fecha_envio"];
                                             } else {
                                                 $col5 = $nosubido;
                                                 $col6 = 'NO DISPONIBLE';
                                                 $colf3 = 'NO DISPONIBLE';
                                             }
-                                        } else {
-                                            echo 'Error';
-                                        }
 
                                         ?>
 
                                         <tr>
                                             <td style="text-align: center;"><?php echo $col5;  ?></td>
                                             <td style="text-align: center;"><?php echo $row["nombre"] . ' ' . $row["apellido_pat"] . ' ' . $row["apellido_mat"]; ?></td>
+                                            <td style="text-align: center;"><?php echo $row["num_control"]; ?></td>
+                                            <td style="text-align: center;"><?php echo $row["semestre_cursado"]; ?></td>
+                                            <td style="text-align: center;"><?php echo $row["especialidad"]; ?></td>
                                             <td style="text-align: center;"><?php echo $colf3 ?></td>
                                             <td style="text-align: center;"><?php echo $col6 ?></td>
                                         </tr>
+                                        <?php }?>
                                     </tbody>
                                 </table>
                             </div>

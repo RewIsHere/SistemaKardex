@@ -1,292 +1,291 @@
-@import url('https://fonts.cdnfonts.com/css/berlin-sans-fb-demi');
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Karla:wght@600&family=Rubik:wght@700&display=swap');
-@import url('https://css.gg/details-more.css');
+@import url("https://fonts.cdnfonts.com/css/berlin-sans-fb-demi");
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Karla:wght@600&family=Rubik:wght@700&display=swap");
+@import url("https://css.gg/details-more.css");
 /* IMPORTA LAS TIPOGRAFIAS E ICONOS */
 
 * {
-    padding: 0px;
-    margin: 0px;
-    /* REINICIA LOS VALORES POR DEFECTO DEL NAVEGADOR */
+  padding: 0px;
+  margin: 0px;
+  /* REINICIA LOS VALORES POR DEFECTO DEL NAVEGADOR */
 }
 
 :root {
-    --red: #ff3838;
-    --white: #ffffff;
-    --black: #000000;
-    --colorFondo: #fffff;
-    --colorPrimario: #800000;
-    --colorSecundario: #FFFFFF;
-    /* VARIABLES GLOBALES DEL DOCUMENTO */
+  --red: #ff3838;
+  --white: #ffffff;
+  --black: #000000;
+  --colorFondo: #fffff;
+  --colorPrimario: #800000;
+  --colorSecundario: #ffffff;
+  /* VARIABLES GLOBALES DEL DOCUMENTO */
 }
 
 html,
 body {
-    height: 100%;
-    width: 100%;
-    background-color: var(--colorFondo) !important;
-    font-family: 'Rubik', sans-serif !important;
+  height: 100%;
+  width: 100%;
+  background-color: var(--colorFondo) !important;
+  font-family: "Rubik", sans-serif !important;
 }
 
 /* ESTILOS DEL MENU DE NAVEGACION*/
 
 .navegacion {
-    background-color: var(--colorPrimario);
-    padding: 30px 10px;
-    top: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    font-family: 'Rubik', sans-serif;
+  background-color: var(--colorPrimario);
+  padding: 30px 10px;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  font-family: "Rubik", sans-serif;
 }
 
 .navegacion a {
-    float: left;
-    color: var(--white);
-    text-align: center;
-    text-decoration: none;
-    font-size: 18px;
-    font-weight: bold;
-    line-height: 25px;
-    padding: 12px;
+  float: left;
+  color: var(--white);
+  text-align: center;
+  text-decoration: underline;
+  font-size: 21px;
+  font-weight: bold;
+  line-height: 25px;
+  padding: 12px;
 }
 
 .navegacion__navegacion-list a:hover {
-    color: var(--red);
+  color: var(--red);
 }
 
 .navegacion__navegacion-list a.active {
-    color: var(--red);
+  color: var(--red);
 }
 
 .navegacion__navegacion-list a {
-    transition: color 0.5s ease;
+  transition: color 0.5s ease;
 }
 
 .navegacion .navegacion__icon {
-    display: none;
+  display: none;
 }
 
 .navegacion ul {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .navegacion li {
-    list-style: none;
+  list-style: none;
 }
 
 /* ESTILOS DE LA TIRA DE LA CABECERA */
 
 .tira-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .tira-header__img {
-    width: 80%;
+  width: 80%;
 }
 
 .navtop {
-    background-color: #2f3947;
-    height: 60px;
-    width: 100%;
-    border: 0;
+  background-color: #2f3947;
+  height: 60px;
+  width: 100%;
+  border: 0;
 }
 
 .navtop div {
-    display: flex;
-    margin: 0 auto;
-    width: 1000px;
-    height: 100%;
+  display: flex;
+  margin: 0 auto;
+  width: 1000px;
+  height: 100%;
 }
 
 .navtop div h1,
 .navtop div a {
-    display: inline-flex;
-    align-items: center;
+  display: inline-flex;
+  align-items: center;
 }
 
 .navtop div h1 {
-    flex: 1;
-    font-size: 24px;
-    padding: 0;
-    margin: 0;
-    color: #eaebed;
-    font-weight: normal;
+  flex: 1;
+  font-size: 24px;
+  padding: 0;
+  margin: 0;
+  color: #eaebed;
+  font-weight: normal;
 }
 
 .navtop div a {
-    padding: 0 20px;
-    text-decoration: none;
-    color: #c1c4c8;
-    font-weight: bold;
+  padding: 0 20px;
+  text-decoration: none;
+  color: #c1c4c8;
+  font-weight: bold;
 }
 
 .navtop div a i {
-    padding: 2px 8px 0 0;
+  padding: 2px 8px 0 0;
 }
 
 .navtop div a:hover {
-    color: #eaebed;
+  color: #eaebed;
 }
 
 body.loggedin {
-    background-color: #f3f4f7;
+  background-color: #f3f4f7;
 }
 
 .content {
-    width: 1000px;
-    margin: 0 auto;
+  width: 1000px;
+  margin: 0 auto;
 }
 
 .content h2 {
-    margin: 0;
-    padding: 25px 0;
-    font-size: 22px;
-    border-bottom: 1px solid #e0e0e3;
-    color: #4a536e;
+  margin: 0;
+  padding: 25px 0;
+  font-size: 22px;
+  border-bottom: 1px solid #e0e0e3;
+  color: #4a536e;
 }
 
-.content>p,
-.content>div {
-    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
-    margin: 25px 0;
-    padding: 25px;
-    background-color: #fff;
+.content > p,
+.content > div {
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+  margin: 25px 0;
+  padding: 25px;
+  background-color: #fff;
 }
 
-.content>p table td,
-.content>div table td {
-    padding: 5px;
+.content > p table td,
+.content > div table td {
+  padding: 5px;
 }
 
-.content>p table td:first-child,
-.content>div table td:first-child {
-    font-weight: bold;
-    color: #4a536e;
-    padding-right: 15px;
+.content > p table td:first-child,
+.content > div table td:first-child {
+  font-weight: bold;
+  color: #4a536e;
+  padding-right: 15px;
 }
 
-.content>div p {
-    padding: 5px;
-    margin: 0 0 10px 0;
+.content > div p {
+  padding: 5px;
+  margin: 0 0 10px 0;
 }
 
 /* ESTILOS DEL FORMULARIO DE LOGIN */
 .form-empresa {
-    padding: 50px 20px;
-    background-color: #ededed;
-    margin-top: 70px;
-    padding-top: 28px;
-    margin-bottom: 30px;
+  padding: 50px 20px;
+  background-color: #ededed;
+  margin-top: 70px;
+  padding-top: 28px;
+  margin-bottom: 30px;
 }
 
 .form-empresa h1 {
-
-    text-align: center;
-    color: var(--black);
+  text-align: center;
+  color: var(--black);
 }
 
 .contenedor {
-    width: 100%;
+  width: 100%;
 }
 
 .form-empresa input[type="text"] {
-    font-size: 20px;
-    width: 82%;
-    padding: 10px;
-    border: none;
-    margin: auto;
-    margin-top: 12px;
+  font-size: 20px;
+  width: 82%;
+  padding: 10px;
+  border: none;
+  margin: auto;
+  margin-top: 12px;
 }
 
 .form-empresa input[type="password"] {
-    font-size: 20px;
-    width: 82%;
-    padding: 10px;
-    border: none;
-    margin: auto;
-    margin-top: 12px;
+  font-size: 20px;
+  width: 82%;
+  padding: 10px;
+  border: none;
+  margin: auto;
+  margin-top: 12px;
 }
 
 .form-empresa input[type="email"] {
-    font-size: 20px;
-    width: 82%;
-    padding: 10px;
-    border: none;
-    margin: auto;
-    margin-top: 12px;
+  font-size: 20px;
+  width: 82%;
+  padding: 10px;
+  border: none;
+  margin: auto;
+  margin-top: 12px;
 }
 
 .form-empresa input[type="tel"] {
-    font-size: 20px;
-    width: 82%;
-    padding: 10px;
-    border: none;
-    margin: auto;
-    margin-top: 12px;
+  font-size: 20px;
+  width: 82%;
+  padding: 10px;
+  border: none;
+  margin: auto;
+  margin-top: 12px;
 }
 
 .form-empresa input[type="number"] {
-    font-size: 20px;
-    width: 82%;
-    padding: 10px;
-    border: none;
-    margin: auto;
-    margin-top: 12px;
+  font-size: 20px;
+  width: 82%;
+  padding: 10px;
+  border: none;
+  margin: auto;
+  margin-top: 12px;
 }
 
 .form-empresa input[type="date"] {
-    font-size: 20px;
-    width: 82%;
-    padding: 10px;
-    border: none;
-    margin: auto;
-    margin-top: 12px;
+  font-size: 20px;
+  width: 82%;
+  padding: 10px;
+  border: none;
+  margin: auto;
+  margin-top: 12px;
 }
 
 .icon {
-    min-width: 50px;
-    text-align: center;
-    color: rgb(110, 5, 5);
+  min-width: 50px;
+  text-align: center;
+  color: rgb(110, 5, 5);
 }
 
 .form-empresa input {
-    width: calc(100% - 20px);
-    padding: 9px;
-    margin: auto;
-    margin-top: 12px;
-    font-size: 16px;
+  width: calc(100% - 20px);
+  padding: 9px;
+  margin: auto;
+  margin-top: 12px;
+  font-size: 16px;
 }
 
 .button {
-    border: none;
-    width: 80%;
-    color: white;
-    font-size: 20px;
-    background: #220c51;
-    padding: 5px 5px;
-    border-radius: 5px;
-    cursor: pointer;
+  border: none;
+  width: 80%;
+  color: white;
+  font-size: 20px;
+  background: #220c51;
+  padding: 5px 5px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .bot_reset {
-    border: none;
-    width: 80%;
-    color: white;
-    font-size: 20px;
-    background: #370a49;
-    padding: 5px 5px;
-    border-radius: 5px;
-    cursor: pointer;
+  border: none;
+  width: 80%;
+  color: white;
+  font-size: 20px;
+  background: #370a49;
+  padding: 5px 5px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .form-empresa p {
-    text-align: center;
-    color: var(--black);
+  text-align: center;
+  color: var(--black);
 }

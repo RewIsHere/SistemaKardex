@@ -121,13 +121,13 @@ if (!isset($_POST['buscadepartamento'])) {
                                                                 <?php
                                                                 // ESTABLECE EL TEXTO DEPENDIENDO DE LA OPCION QUE TENGAMOS SELECCIONADA
                                                                 if ($_POST["buscadepartamento"] == 'Creditos') {
-                                                                    echo 'Solicitud Residencia';
+                                                                    echo 'Creditos';
                                                                 }
                                                                 if ($_POST["buscadepartamento"] == 'Justificantes') {
-                                                                    echo 'Carta de Aceptacion';
+                                                                    echo 'Justificantes';
                                                                 }
                                                                 if ($_POST["buscadepartamento"] == 'Altas_y_Bajas') {
-                                                                    echo 'Reporte preliminar';
+                                                                    echo 'Altas_y_Bajas';
                                                                 }
                                                                 ?>
                                                             </option>
@@ -154,19 +154,11 @@ if (!isset($_POST['buscadepartamento'])) {
 
 
                             // SI NO HAY NINGUN FILTRO ESTABLECIDO LISTARA LOS ALUMNOS CON TODOS SUS ARCHIVOS
-                            if ($_POST['buscadepartamento'] == '') {
-                                $query = "SELECT alumno.num_control  AS alum_nc, alumno.nombre  AS alum_nom, alumno.apellido_pat  AS alum_app, alumno.apellido_mat  AS 
-                                alum_apm,alumno.semestre_cursado AS alum_sem, alumno.especialidad AS alum_espe, docs_alumno.Id_alumno AS docs_idalum FROM alumno INNER JOIN docs_alumno ON alumno.num_control = docs_alumno.Id_alumno";
-                            } else {
-
-
-
-                                // SI EL FILTRO ES DIFERENTE DE NULO LISTARA EN BASE AL FILTRO SELECCIONADO
-                                if ($_POST["buscadepartamento"] != '') {
-                                    $query = "SELECT alumno.num_control  AS alum_nc, alumno.nombre  AS alum_nom, alumno.apellido_pat  AS alum_app, alumno.apellido_mat  AS 
-                                alum_apm,alumno.semestre_cursado AS alum_sem, alumno.especialidad AS alum_espe, docs_alumno.Id_alumno AS docs_idalum FROM alumno INNER JOIN docs_alumno ON alumno.num_control = docs_alumno.Id_alumno";
-                                }
-                            }
+if ($_POST["buscadepartamento"] != '') {
+    $query = "SELECT alumno.num_control AS alum_nc, alumno.nombre AS alum_nom, alumno.apellido_pat AS alum_app, alumno.apellido_mat AS alum_apm, alumno.semestre_cursado AS alum_sem, alumno.especialidad AS alum_espe, docs_alumno.Id_alumno AS docs_idalum, docs_alumno.Tipo_documento AS docs_tipodoc, docs_alumno.Url_documento AS docs_urldoc, docs_alumno.fecha_envio AS docs_fecha FROM alumno INNER JOIN docs_alumno ON alumno.num_control = docs_alumno.Id_alumno WHERE docs_alumno.Tipo_documento = '".$_POST["buscadepartamento"]."'";
+} else {
+    $query = "SELECT alumno.num_control AS alum_nc, alumno.nombre AS alum_nom, alumno.apellido_pat AS alum_app, alumno.apellido_mat AS alum_apm, alumno.semestre_cursado AS alum_sem, alumno.especialidad AS alum_espe, docs_alumno.Id_alumno AS docs_idalum, docs_alumno.Tipo_documento AS docs_tipodoc, docs_alumno.Url_documento AS docs_urldoc, docs_alumno.fecha_envio AS docs_fecha FROM alumno INNER JOIN docs_alumno ON alumno.num_control = docs_alumno.Id_alumno";
+}
 
                             // EJECUTAMOS EL QUERY
 
@@ -187,38 +179,44 @@ if (!isset($_POST['buscadepartamento'])) {
                                         <th>Nombre</th>
                                         <th>Semestre</th>
                                         <th>Especialidad</th>
+                                        <th>Tipo de Documento</th>
+                                        <th>Fecha de Envio</th>
                                         <th>Accion</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php
-                                    // HACEMOS UN BUCLE PARA RELLENAR LA TABLA EN BASE AL QUERY ANTERIOR
-                                    while ($rowSql = $sql->fetch_assoc()) {   ?>
+    <?php
+while ($rowSql = $sql->fetch_assoc()) {
+    ?>
+    <tr>
+        <td style="text-align: center;"><?php echo $rowSql["alum_nc"]; ?></td>
+        <td style="text-align: center;"><?php echo $rowSql["alum_nom"]; ?></td>
+        <td style="text-align: center;"><?php echo $rowSql["alum_sem"]; ?></td>
+        <td style="text-align: center;"><?php echo $rowSql["alum_espe"]; ?></td>
+        <?php
+        $tab4 = '';
+        $tab5 = '';
+        $tab6 = '';
 
-                                        <tr>
-                                            <td style="text-align: center;"><?php echo $rowSql["alum_nc"]; ?></td>
-                                            <td style="text-align: center;"><?php echo $rowSql["alum_nom"]; ?></td>
-                                            <td style="text-align: center;"><?php echo $rowSql["alum_sem"]; ?></td>
-                                            <td style="text-align: center;"><?php echo $rowSql["alum_espe"]; ?></td>
-                                            <?php
-                                            if ($_POST["buscadepartamento"] != '') {
-                                                $archivoquery = "SELECT * FROM docs_alumno WHERE Id_alumno ='" . $rowSql["alum_nc"] . "' ";
-                                                $archivosql = $con->query($archivoquery);
-                                                $archivorow = $archivosql->fetch_assoc();
-                                                if ($archivorow[$_POST["buscadepartamento"]] == null) {
-                                                    $tab4 = 'NO SE HA SUBIDO AUN';
-                                                } else {
-                                                    $tab4 = '<a href="archivos/' . $archivorow[$_POST["buscadepartamento"]] . '" class="btn btn-info" role="button">Abrir</a>                                                ';
-                                                }
-                                            } else {
-                                                $tab4 = "<button type='button' class='btn btn-warning' data-bs-toggle='modal' data-bs-target='#edit" . $rowSql['alum_nc'] .  "'>Ver </button>";
-                                            } ?>
-                                            <td style="text-align: center;"><?php echo $tab4 ?>
-                                                <?php include('includes/verArchivos.php'); ?>
-                                            </td>
-                                        </tr>
+        if ($_POST["buscadepartamento"] != '') {
+            $archivoquery = "SELECT * FROM docs_alumno WHERE Id_alumno ='" . $rowSql["alum_nc"] . "' AND Tipo_documento ='" . $_POST["buscadepartamento"] . "'";
+            $archivosql = $con->query($archivoquery);
+            $archivorow = $archivosql->fetch_assoc();
+            $tab4 = '<a href="archivos/' . $archivorow["Url_documento"] . '" class="btn btn-info" role="button">Abrir</a>';
+            $tab5 = $archivorow["Tipo_documento"];
+            $tab6 = $archivorow["fecha_envio"];
+        } else {
+            $tab4 = '<a href="archivos/' . $rowSql["docs_urldoc"] . '" class="btn btn-info" role="button">Abrir</a>';
+            $tab5 = $rowSql["docs_tipodoc"];
+            $tab6 = $rowSql["docs_fecha"];
+        }
+        ?>
+        <td style="text-align: center;"><?php echo $tab5 ?></td>
+        <td style="text-align: center;"><?php echo $tab6 ?></td>
+        <td style="text-align: center;"><?php echo $tab4 ?></td>
+    </tr>
+<?php } ?>
 
-                                    <?php } ?>
                                 </tbody>
                             </table>
                         </div>

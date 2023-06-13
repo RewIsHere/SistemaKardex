@@ -1,0 +1,34 @@
+.btn-danger {
+  width: 100% !important;
+  margin-bottom: 10px;
+}
+
+.btn-warning {
+  width: 100% !important;
+  margin-bottom: 10px;
+}
+
+.btn-info {
+  width: 100% !important;
+  margin-bottom: 10px;
+}
+
+.col-md-6 {
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.btnAprobaciones {
+  display: flex;
+  text-decoration: none;
+  background-color: #352d2d;
+  padding: 10px;
+  border-radius: 10px;
+  width: 300px;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+.btnActive {
+  background-color: #b39090;
+}
