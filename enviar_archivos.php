@@ -73,8 +73,8 @@ $row = $globalsql->fetch_assoc();
                                         <div class="form-group col-3">
                                             <label class="pb-2">Tipo de Documento</label>
                                             <select class="form-control" name="tipo_doc" id="tipo_doc">
-                                                <option value="Creditos">Liberacion de Creditos</option>
-                                                <option value="Justificantes">Justifcantes</option>
+                                                <option value="Liberacion_de_Creditos">Liberacion de Creditos</option>
+                                                <option value="Justificantes">Justificantes</option>
                                                 <option value="Altas_y_Bajas">Altas y Bajas</option>
                                             </select>
                                         </div>
@@ -99,10 +99,10 @@ $row = $globalsql->fetch_assoc();
                                             <th>Accion</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="Creditos">
+                                    <tbody id="Liberacion_de_Creditos">
                                         <?php
 
-                                        $archivoquery1 = "SELECT * FROM docs_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Tipo_documento = 'Creditos'";
+                                        $archivoquery1 = "SELECT * FROM docs_alumno WHERE Id_alumno ='" . $row["num_control"] . "' AND Tipo_documento = 'Liberacion_de_Creditos'";
                                         $archivosql1 = $con->query($archivoquery1);
                                         while($archivorow1 = $archivosql1->fetch_assoc()) {
 

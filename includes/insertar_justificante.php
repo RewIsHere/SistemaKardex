@@ -9,6 +9,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $archivos = $_FILES["archivos"];
     $fechaInput = $_POST["fecha"]; // Obtener el valor del input de fecha
 
+
+date_default_timezone_set('America/Mexico_City');
     // Convertir el formato de fecha
     $fechaMySQL = date("Y-m-d", strtotime($fechaInput));
 

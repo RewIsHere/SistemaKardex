@@ -120,8 +120,8 @@ if (!isset($_POST['buscadepartamento'])) {
                                                             <option value="<?php echo $_POST["buscadepartamento"]; ?>">
                                                                 <?php
                                                                 // ESTABLECE EL TEXTO DEPENDIENDO DE LA OPCION QUE TENGAMOS SELECCIONADA
-                                                                if ($_POST["buscadepartamento"] == 'Creditos') {
-                                                                    echo 'Creditos';
+                                                                if ($_POST["buscadepartamento"] == 'Liberacion_de_Creditos') {
+                                                                    echo 'Liberacion_de_Creditos';
                                                                 }
                                                                 if ($_POST["buscadepartamento"] == 'Justificantes') {
                                                                     echo 'Justificantes';
@@ -134,7 +134,7 @@ if (!isset($_POST['buscadepartamento'])) {
 
                                                         <?php } ?>
                                                         <option value="">Todos</option>
-                                                        <option value="Creditos">Liberacion de Creditos</option>
+                                                        <option value="Liberacion_de_Creditos">Liberacion de Creditos</option>
                                                         <option value="Justificantes">Justificantes</option>
                                                         <option value="Altas_y_Bajas">Altas y Bajas</option>
                                                     </select>

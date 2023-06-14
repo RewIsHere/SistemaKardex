@@ -5,6 +5,7 @@ $uname = $_SESSION['no_control'];
 $globalquery = "SELECT * FROM alumno WHERE num_control ='" . $uname . "' ";
 $globalsql = $con->query($globalquery);
 $row = $globalsql->fetch_assoc();
+date_default_timezone_set('America/Mexico_City');
 
 if (isset($_POST["tipo_doc"])) {
     $nombreArchivo = $_FILES['archivo']['name'];
@@ -36,8 +37,8 @@ if (isset($_POST["tipo_doc"])) {
             move_uploaded_file($nombreArchivoTemp, $archivo_ubi);
 
             switch ($_POST['tipo_doc']) {
-                case 'Creditos':
-                    $tipoarchivo = "Creditos";
+                case 'Liberacion_de_Creditos':
+                    $tipoarchivo = "Liberacion_de_Creditos";
                     break;
                 case 'Justificantes':
                     $tipoarchivo = "Justificantes";

@@ -12,7 +12,7 @@ if (empty($_POST['nombre']) || empty($_POST['num_control']) || empty($_POST['con
 }
 
 // DEFINIMOS VARIABLES PARA OBTENER LOS CAMPOS DEL FORMULARIO
-
+date_default_timezone_set('America/Mexico_City');
 $nombre = $_POST['nombre'];
 $apellido_pat = $_POST['apellido_pat'];
 $apellido_mat = $_POST['apellido_mat'];

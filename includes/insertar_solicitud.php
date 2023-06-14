@@ -6,6 +6,8 @@ $uname = $_SESSION["no_control"];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $tipoDoc = $_POST["tipo_doc"];
+    
+    date_default_timezone_set('America/Mexico_City');
     $fechaActual = date("Y-m-d");
     $uname = $_SESSION["no_control"];
     $selectQuery = "SELECT * FROM Solicitudes_alumno WHERE Id_alumno = '$uname' AND Tipo_documento = '$tipoDoc'";
